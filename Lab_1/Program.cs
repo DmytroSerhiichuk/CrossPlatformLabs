@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualBasic;
-
-namespace Lab_1;
+﻿namespace Lab_1;
 
 class Program
 {
@@ -24,28 +22,41 @@ class Program
         Console.WriteLine($"p1 = {p1}");
         Console.WriteLine($"p2 = {p2}");
 
-        var S1 = new HashSet<string>();
-        GenerateCombinations(p1, S1);
+        var res = 0;
 
-        var S2 = new HashSet<string>();
-        GenerateCombinations(p2, S2);
-
-        var res = new HashSet<string>(S1.Count + S2.Count);
-        foreach (var item in S1)
+        for (var i = 0; i < p1.Length; i++)
         {
-            if (S2.Contains(item))
+            string t1 = p1[i].ToString(), t2 = p2[i].ToString();
+
+            if (p1[i] < '0' || p1[i] > '9')
             {
-                res.Add(item);
+                t1 = Replacements[p1[i]];
+            }
+            if (p2[i] < '0' || p2[i] > '9')
+            {
+                t2 = Replacements[p2[i]];
+            }
+
+            var count = t1.Count(c => t2.Contains(c));
+
+            if (count > 0 && res == 0)
+            {
+                res = count;
+            }
+            else if (count > 0)
+            {
+                res *= count;
+            }
+            else
+            {
+                res = 0;
+                break;
             }
         }
 
-        Console.WriteLine($"Count: {res.Count}");
-        foreach (var i in res)
-        {
-            Console.WriteLine(i);
-        }
+        Console.WriteLine($"Count: {res}");
 
-        SaveOutput(res.Count);
+        SaveOutput(res);
     }
 
     static (string, string) ReadInput()
@@ -75,29 +86,6 @@ class Program
         if (p1.Any(c => !ValidChars.Contains(c)) || p2.Any(c => !ValidChars.Contains(c)))
         {
             throw new ArgumentException($"Допустимі символи: {string.Join(", ", ValidChars.ToCharArray())}");
-        }
-    }
-
-    static void GenerateCombinations(string input, HashSet<string> results, int index = 0, string current = "")
-    {
-        if (index == input.Length)
-        {
-            results.Add(current);
-            return;
-        }
-
-        char currentChar = input[index];
-
-        if (Replacements.TryGetValue(currentChar, out string replacement))
-        {
-            foreach (char replacementChar in replacement)
-            {
-                GenerateCombinations(input, results, index + 1, current + replacementChar);
-            }
-        }
-        else
-        {
-            GenerateCombinations(input, results, index + 1, current + currentChar);
         }
     }
 
