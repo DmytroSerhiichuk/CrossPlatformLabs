@@ -1,0 +1,20 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <SelectedProject Condition="'$(Project)' == 'Lab_1'">Lab_1</SelectedProject>
+  </PropertyGroup>
+
+  <Target Name="Build">
+    <MSBuild Projects="$(SelectedProject)\$(SelectedProject).csproj" Targets="Build" />
+  </Target>
+
+  <Target Name="Test">
+    <Exec Command="dotnet test --logger &quot;console;verbosity=detailed&quot; $(SelectedProject)_Test\$(SelectedProject)_Test.csproj" />
+  </Target>
+
+  <Target Name="Run" DependsOnTargets="Build">
+    <Exec Command="dotnet run --project $(SelectedProject)\$(SelectedProject).csproj" />
+  </Target>
+
+</Project>

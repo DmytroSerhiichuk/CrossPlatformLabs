@@ -1,6 +1,6 @@
 ﻿namespace Lab_1;
 
-class Program
+public class Program
 {
     const string ValidChars = "0123456789abcdef?";
     readonly static Dictionary<char, string> Replacements = new Dictionary<char, string>
@@ -17,11 +17,53 @@ class Program
 
     static void Main(string[] args)
     {
-        (var p1, var p2) = ReadInput();
+        var projectRoot = AppDomain.CurrentDomain.BaseDirectory;
+        Directory.SetCurrentDirectory(Path.GetFullPath(Path.Combine(projectRoot, @"../../../")));
+
+        (var p1, var p2) = ReadInput("INPUT.txt");
+
+        CheckInputs(p1, p2);
 
         Console.WriteLine($"p1 = {p1}");
         Console.WriteLine($"p2 = {p2}");
 
+        var res = CalcCount(p1, p2);
+
+        Console.WriteLine($"Count: {res}");
+
+        SaveOutput(res);
+    }
+
+    public static (string, string) ReadInput(string path)
+    {
+        using (var sr = new StreamReader(path))
+        {
+            var p1 = sr.ReadLine().Trim();
+            var p2 = sr.ReadLine().Trim();
+
+            return (p1, p2);
+        }
+    }
+    public static void CheckInputs(string p1, string p2)
+    {
+        if (p1.Length != p2.Length)
+        {
+            throw new ArgumentException("Вхідні дані мають бути однакової довжини");
+        }
+
+        if (p1.Length == 0 || p1.Length > 9 || p2.Length == 0 || p2.Length > 9)
+        {
+            throw new ArgumentException("Вхідні дані мають бути довжиною від 1 до 9");
+        }
+
+        if (p1.Any(c => !ValidChars.Contains(c)) || p2.Any(c => !ValidChars.Contains(c)))
+        {
+            throw new ArgumentException($"Допустимі символи: {string.Join(", ", ValidChars.ToCharArray())}");
+        }
+    }
+
+    public static int CalcCount(string p1, string p2)
+    {
         var res = 0;
 
         for (var i = 0; i < p1.Length; i++)
@@ -54,39 +96,7 @@ class Program
             }
         }
 
-        Console.WriteLine($"Count: {res}");
-
-        SaveOutput(res);
-    }
-
-    static (string, string) ReadInput()
-    {
-        using (var sr = new StreamReader("./INPUT.txt"))
-        {
-            var p1 = sr.ReadLine().Trim();
-            var p2 = sr.ReadLine().Trim();
-
-            CheckInputs(p1, p2);
-
-            return (p1, p2);
-        }
-    }
-    static void CheckInputs(string p1, string p2)
-    {
-        if (p1.Length != p2.Length)
-        {
-            throw new ArgumentException("Вхідні дані мають бути однакової довжини");
-        }
-
-        if (p1.Length == 0 || p1.Length > 9 || p2.Length == 0 || p2.Length > 9)
-        {
-            throw new ArgumentException("Вхідні дані мають бути довжиною від 1 до 9");
-        }
-
-        if (p1.Any(c => !ValidChars.Contains(c)) || p2.Any(c => !ValidChars.Contains(c)))
-        {
-            throw new ArgumentException($"Допустимі символи: {string.Join(", ", ValidChars.ToCharArray())}");
-        }
+        return res;
     }
 
     static void SaveOutput(int count)
