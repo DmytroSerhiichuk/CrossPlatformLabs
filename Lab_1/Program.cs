@@ -38,8 +38,19 @@ public class Program
     {
         using (var sr = new StreamReader(path))
         {
-            var p1 = sr.ReadLine().Trim();
-            var p2 = sr.ReadLine().Trim();
+            var p1 = sr.ReadLine()?.Trim();
+            var p2 = sr.ReadLine()?.Trim();
+
+            if (p1 == null)
+            {
+                var paramName = nameof(p1);
+                throw new ArgumentNullException(paramName);
+            }
+            if (p2 == null)
+            {
+                var paramName = nameof(p2);
+                throw new ArgumentNullException(paramName);
+            }
 
             return (p1, p2);
         }

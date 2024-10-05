@@ -11,7 +11,7 @@
   </Target>
 
   <Target Name="Test" DependsOnTargets="Build">
-    <Exec Command="dotnet test --logger &quot;console;verbosity=detailed&quot; $(SelectedProject)_Test\$(SelectedProject)_Test.csproj" />
+    <Exec Command="dotnet test --logger &quot;console;verbosity=detailed&quot; --collect:&quot;XPlat Code Coverage&quot; $(SelectedProject)_Test\$(SelectedProject)_Test.csproj" />
   </Target>
 
   <Target Name="Run" DependsOnTargets="Build">
