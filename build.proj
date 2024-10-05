@@ -7,9 +7,10 @@
 
   <Target Name="Build">
     <MSBuild Projects="$(SelectedProject)\$(SelectedProject).csproj" Targets="Build" />
+    <MSBuild Projects="$(SelectedProject)_Test\$(SelectedProject)_Test.csproj" Targets="Build" />
   </Target>
 
-  <Target Name="Test">
+  <Target Name="Test" DependsOnTargets="Build">
     <Exec Command="dotnet test --logger &quot;console;verbosity=detailed&quot; $(SelectedProject)_Test\$(SelectedProject)_Test.csproj" />
   </Target>
 

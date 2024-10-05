@@ -48,17 +48,17 @@ public class Program
     {
         if (p1.Length != p2.Length)
         {
-            throw new ArgumentException("Вхідні дані мають бути однакової довжини");
+            throw new ArgumentException("The input data must be of the same length");
         }
 
         if (p1.Length == 0 || p1.Length > 9 || p2.Length == 0 || p2.Length > 9)
         {
-            throw new ArgumentException("Вхідні дані мають бути довжиною від 1 до 9");
+            throw new ArgumentException("Input data must be between 1 and 9 in length");
         }
 
         if (p1.Any(c => !ValidChars.Contains(c)) || p2.Any(c => !ValidChars.Contains(c)))
         {
-            throw new ArgumentException($"Допустимі символи: {string.Join(", ", ValidChars.ToCharArray())}");
+            throw new ArgumentException($"Valid characters: {string.Join(", ", ValidChars.ToCharArray())}");
         }
     }
 
