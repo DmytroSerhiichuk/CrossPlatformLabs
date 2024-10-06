@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <SelectedProject Condition="'$(Project)' == 'Lab_1'">Lab_1</SelectedProject>
+    <SelectedProject Condition="'$(Solution)' == 'Lab1'">Lab_1</SelectedProject>
   </PropertyGroup>
 
   <Target Name="Build">

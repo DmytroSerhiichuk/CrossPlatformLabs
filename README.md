@@ -2,15 +2,15 @@
 
 Запуск:
 ```bash
-dotnet build build.proj /t:Run /p:Project=Lab_<номер_лабораторної>
+dotnet build Build.proj -p:Solution=Lab<номер_лабораторної> -t:Run
 ```
 
 Білд:
 ```bash
-dotnet build build.proj /t:Build /p:Project=Lab_<номер_лабораторної>
+dotnet build Build.proj -p:Solution=Lab<номер_лабораторної> -t:Build
 ```
 
 Тест:
 ```bash
-dotnet build build.proj /t:Test /p:Project=Lab_<номер_лабораторної>
+dotnet build Build.proj -p:Solution=Lab<номер_лабораторної> -t:Test
 ```
