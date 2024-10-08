@@ -1,7 +1,7 @@
 ﻿using Lab_1;
-using System.Diagnostics;
 using Xunit;
 using Xunit.Abstractions;
+
 namespace Lab_1_Test;
 
 public class Tests
