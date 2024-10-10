@@ -4,6 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <SelectedProject Condition="'$(Solution)' == 'Lab1'">Lab_1</SelectedProject>
     <SelectedProject Condition="'$(Solution)' == 'Lab2'">Lab_2</SelectedProject>
+    <SelectedProject Condition="'$(Solution)' == 'Lab3'">Lab_3</SelectedProject>
   </PropertyGroup>
 
   <Target Name="Build">

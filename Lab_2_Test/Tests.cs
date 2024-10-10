@@ -42,9 +42,9 @@ public class Tests
     [InlineData("-5")]
     [InlineData("0")]
     [InlineData("10005")]
-    public void CheckInput_ShouldThrowArgumentException_ForInvalidData(string str)
+    public void InitInput_ShouldThrowArgumentException_ForInvalidData(string str)
     {
-        var exception = Assert.Throws<ArgumentException>(() => Program.CheckInput(str));
+        var exception = Assert.Throws<ArgumentException>(() => Program.InitInput(str));
 
         _output.WriteLine($"input: \"{str}\" | message: {exception.Message}");
     }

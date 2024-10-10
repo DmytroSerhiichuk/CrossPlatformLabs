@@ -9,7 +9,7 @@ public class Program
 
         var nStr = ReadFile("INPUT.txt");
 
-        var n = CheckInput(nStr);
+        var n = InitInput(nStr);
 
         Console.WriteLine($"N: {n}");
 
@@ -36,7 +36,7 @@ public class Program
         }
     }
 
-    public static uint CheckInput(string input)
+    public static uint InitInput(string input)
     {
         if (!uint.TryParse(input, out var n))
         {
