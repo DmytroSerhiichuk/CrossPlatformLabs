@@ -103,7 +103,7 @@ public class Program
             }
         }
 
-        throw new Exception("Unable to find result");
+        throw new InvalidOperationException("Unable to find result");
     }
 
     private static bool IsInside(uint N, int x, int y)
@@ -121,8 +121,8 @@ public class Program
 }
 public struct Point
 {
-    public int X;
-    public int Y;
+    public int X { get; private set; }
+    public int Y { get; private set; }
 
     public Point(int x, int y)
     {
@@ -138,9 +138,9 @@ public struct Point
 
 public struct Node
 {
-    public int X;
-    public int Y;
-    public int Count;
+    public int X { get; private set; }
+    public int Y { get; private set; }
+    public int Count { get; private set; }
 
     public Node(int x, int y, int count)
     {
