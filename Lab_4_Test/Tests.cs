@@ -28,7 +28,7 @@ public class Tests
     [InlineData("run lab1 -p .\\INPUT.txt", HandleInputsResult.SyntaxError)]
     public void HandleInputs_ReturnsSyntaxError(string input, HandleInputsResult expected)
     {
-        var res = Program.HandleInputs(input);
+        var res = Program.HandleInputs(input.Split(' ', StringSplitOptions.RemoveEmptyEntries));
 
         Assert.Equal(expected, res);
         _output.WriteLine($"input: {input} | expected: {expected} | result: {res}");
@@ -39,7 +39,7 @@ public class Tests
     [InlineData("set-path -p .", HandleInputsResult.Success)]
     public void HandleInputs_ReturnsSuccess(string input, HandleInputsResult expected)
     {
-        var res = Program.HandleInputs(input);
+        var res = Program.HandleInputs(input.Split(' ', StringSplitOptions.RemoveEmptyEntries));
 
         Assert.Equal(expected, res);
         _output.WriteLine($"input: {input} | expected: {expected} | result: {res}");

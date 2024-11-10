@@ -1,5 +1,13 @@
-Якщо через dotnet build Build.proj (msbuild) програма одразу завершує роботу, то потрібно вмикати програму вручну
-===
+Для передачі аргументів використовувати таку команду:
+```bash
+dotnet run -- аргументи
+```
+
+Приклад:
+```bash
+dotnet run -- run lab1 --input ./inputs/INPUT.txt -o OUTPUT.txt
+```
+---
 
 Файл .nupkg було створено через Visual Studio, через модифікаю файлу .csproj
 
@@ -24,6 +32,7 @@ vagrant up
 * Через Virtual Box
 
 Після цього потрібно налаштувати INPUT.txt файл(и)
+
 Для запуску програми потрібно ввести:
 * Для Windows: Lab_4
 * Для Linux: dotnet Lab_4 або dotnet tool run Lab_4

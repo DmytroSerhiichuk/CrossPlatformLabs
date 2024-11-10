@@ -19,7 +19,7 @@
   </Target>
 
   <Target Name="Run">
-    <Exec Command="dotnet run --project $(SelectedProject)\$(SelectedProject).csproj" />
+    <Exec Command="dotnet run --project $(SelectedProject)\$(SelectedProject).csproj -- $(Args)" />
   </Target>
 
 </Project>

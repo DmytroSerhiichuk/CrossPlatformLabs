@@ -8,8 +8,7 @@ public class Program
     {
         ("version", "show info"),
         ("set-path [-p | --path] <path to folder>", "set path to folder with input file"),
-        ("run lab{1|2|3} [-i | --input] [<path to input>] [-o | --output] [<path to output>]", "run a specific project"),
-        ("exit", "close the program")
+        ("run lab{1|2|3} [-i | --input] [<path to input>] [-o | --output] [<path to output>]", "run a specific project")
     };
     public static readonly int MaxCommandWidth;
 
@@ -24,27 +23,25 @@ public class Program
 
     static void Main(string[] args)
     {
-        Console.WriteLine("Start");
-
-        while (true)
+        Console.WriteLine("Start\n");
+        if (args.Length == 0)
         {
-            Console.Write("> ");
-            var input = Console.ReadLine() ?? "";
-            if (input == "exit" || input == "")
-            {
-                return;
-            }
-            var res = HandleInputs(input);
+            Help();
+        }
+        else
+        {
+            var res = HandleInputs(args);
             if (res == HandleInputsResult.SyntaxError)
             {
+                Console.WriteLine("Invalid command!");
                 Help();
             }
         }
     }
 
-    public static HandleInputsResult HandleInputs(string input)
+    public static HandleInputsResult HandleInputs(string[] inputs)
     {
-        var inputs = input.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        var input = String.Join(' ', inputs);
 
         Match match;
 
@@ -144,12 +141,11 @@ public class Program
 
     static void Help()
     {
-        Console.WriteLine("Invalid command!\n" +
-            "Avaible commands:\n");
+        Console.WriteLine("Avaible commands:\n");
 
         foreach (var (Command, Description) in Commands)
         {
-            Console.WriteLine($" {Command.PadRight(MaxCommandWidth)} {Description}");
+            Console.WriteLine($"  {Command.PadRight(MaxCommandWidth)} {Description}");
         }
         Console.WriteLine();
     }
