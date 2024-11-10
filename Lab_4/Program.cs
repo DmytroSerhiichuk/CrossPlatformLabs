@@ -6,9 +6,10 @@ public class Program
 {
     public static readonly List<(string Command, string Description)> Commands = new()
     {
-        ("version", "показати автора та версію"),
-        ("set-path [-p | --path] <шлях до папки>", "встановити шлях до папки з input та output файлами"),
-        ("run lab{1|2|3} [-i | --input] [<шлях до input файла>] [-o | --output] [<шлях до output файла>]", "запустити лабораторну роботу")
+        ("version", "show info"),
+        ("set-path [-p | --path] <path to folder>", "set path to folder with input file"),
+        ("run lab{1|2|3} [-i | --input] [<path to input>] [-o | --output] [<path to output>]", "run a specific project"),
+        ("exit", "close the program")
     };
     public static readonly int MaxCommandWidth;
 
@@ -28,12 +29,20 @@ public class Program
         while (true)
         {
             Console.Write("> ");
-            var input = Console.ReadLine();
-            HandleInputs(input);
+            var input = Console.ReadLine() ?? "";
+            if (input == "exit" || input == "")
+            {
+                return;
+            }
+            var res = HandleInputs(input);
+            if (res == HandleInputsResult.SyntaxError)
+            {
+                Help();
+            }
         }
     }
 
-    static void HandleInputs(string input)
+    public static HandleInputsResult HandleInputs(string input)
     {
         var inputs = input.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
@@ -45,6 +54,8 @@ public class Program
             {
                 Console.WriteLine("Author: Dmytro Serhiichuk");
                 Console.WriteLine("Version: 1.0.0");
+
+                return HandleInputsResult.Success;
             }
             else if (TryMatch(input, "^set-path (?:-p|--path)\\s+(\"[^\"]+\"|\\S+)$", out match))
             {
@@ -53,10 +64,14 @@ public class Program
                 {
                     Environment.SetEnvironmentVariable("LAB_PATH", path);
                     Console.WriteLine("Success: Directory path updated");
+
+                    return HandleInputsResult.Success;
                 }
                 else
                 {
                     Console.WriteLine($"Error: Directory not found!");
+
+                    return HandleInputsResult.DirectoryNotFound;
                 }
             }
             else if (TryMatch(input, "^run (lab[123])(?:\\s+(?:-i|--input)\\s+(\"[^\"]+\"|\\S+))?(?:\\s+(?:-o|--output)\\s+(\"[^\"]+\"|\\S+))?$", out match))
@@ -91,7 +106,7 @@ public class Program
                 if (inputFilePath == String.Empty)
                 {
                     Console.WriteLine("Error: Input file not found");
-                    return;
+                    return HandleInputsResult.InputNotFound;
                 }
 
                 if (outputFilePath == String.Empty)
@@ -111,28 +126,26 @@ public class Program
                     };
 
                     labAction(inputFilePath, outputFilePath);
+
+                    return HandleInputsResult.Success;
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     Console.WriteLine("Invalid INPUT data!");
+
+                    return HandleInputsResult.InvalidInput;
                 }
             }
-            else
-            {
-                Help();
-            }
         }
-        else
-        {
-            Help();
-        }
+
+        return HandleInputsResult.SyntaxError;
     }
 
     static void Help()
     {
-        Console.WriteLine("Некоректна команда!\n" +
-            "Список команд:\n");
+        Console.WriteLine("Invalid command!\n" +
+            "Avaible commands:\n");
 
         foreach (var (Command, Description) in Commands)
         {
@@ -146,9 +159,13 @@ public class Program
         match = Regex.Match(input, pattern);
         return match.Success;
     }
+}
 
-    private static string GetFilePath(string path)
-    {
-        return !string.IsNullOrEmpty(path) && File.Exists(path) ? path : null;
-    }
+public enum HandleInputsResult
+{
+    Success,
+    SyntaxError,
+    InputNotFound,
+    InvalidInput,
+    DirectoryNotFound
 }

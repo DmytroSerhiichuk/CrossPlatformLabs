@@ -5,18 +5,20 @@
     <SelectedProject Condition="'$(Solution)' == 'Lab1'">Lab_1</SelectedProject>
     <SelectedProject Condition="'$(Solution)' == 'Lab2'">Lab_2</SelectedProject>
     <SelectedProject Condition="'$(Solution)' == 'Lab3'">Lab_3</SelectedProject>
+    <SelectedProject Condition="'$(Solution)' == 'Lab4'">Lab_4</SelectedProject>
+    <SelectedProject Condition="'$(Solution)' == 'Lab5'">Lab_5</SelectedProject>
   </PropertyGroup>
 
   <Target Name="Build">
-    <MSBuild Projects="$(SelectedProject)\$(SelectedProject).csproj" Targets="Build" />
-    <MSBuild Projects="$(SelectedProject)_Test\$(SelectedProject)_Test.csproj" Targets="Build" />
+    <MSBuild Projects="$(SelectedProject)\$(SelectedProject).csproj" Targets="Restore;Build" />
+    <MSBuild Projects="$(SelectedProject)_Test\$(SelectedProject)_Test.csproj" Targets="Restore;Build" />
   </Target>
 
-  <Target Name="Test" DependsOnTargets="Build">
+  <Target Name="Test">
     <Exec Command="dotnet test --logger &quot;console;verbosity=detailed&quot; --collect:&quot;XPlat Code Coverage&quot; $(SelectedProject)_Test\$(SelectedProject)_Test.csproj" />
   </Target>
 
-  <Target Name="Run" DependsOnTargets="Build">
+  <Target Name="Run">
     <Exec Command="dotnet run --project $(SelectedProject)\$(SelectedProject).csproj" />
   </Target>
 

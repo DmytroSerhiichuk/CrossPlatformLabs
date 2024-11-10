@@ -11,7 +11,7 @@ Vagrant.configure("2") do |config|
         config.vm.boot_timeout = 1200
     end
 
-    config.vm.provision "file", source: "../../nuget.config", destination: "/home/vagrant/nuget.config"
+    config.vm.provision "file", source: "../../nuget/nuget.config", destination: "/home/vagrant/nuget.config"
     
     config.vm.provision "shell", inline: <<-SHELL
         sudo apt-get update -y
