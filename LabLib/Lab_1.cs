@@ -1,4 +1,4 @@
-﻿namespace Lab_4_LabLib;
+﻿namespace LabLib;
 
 public class Lab_1
 {
@@ -15,23 +15,29 @@ public class Lab_1
         {'g', "6789"},
     };
 
-    public static void Do(string inputPath, string outputPath)
+    public string P1 { get; private set; }
+    public string P2 { get; private set; }
+
+    public Lab_1(string inputPath)
     {
-        (var p1, var p2) = ReadInput(inputPath);
+        (P1, P2) = ReadInput(inputPath);
 
-        CheckInputs(p1, p2);
+        CheckInputs(P1, P2);
 
-        Console.WriteLine($"p1 = {p1}");
-        Console.WriteLine($"p2 = {p2}");
+        Console.WriteLine($"p1 = {P1}");
+        Console.WriteLine($"p2 = {P2}");
+    }
 
-        var res = CalcCount(p1, p2);
+    public int Do()
+    {
+        var res = CalcCount(P1, P2);
 
         Console.WriteLine($"Count: {res}");
 
-        SaveOutput(res, outputPath);
+        return res;
     }
 
-    static (string, string) ReadInput(string path)
+    (string, string) ReadInput(string path)
     {
         using (var sr = new StreamReader(path))
         {
@@ -52,7 +58,7 @@ public class Lab_1
             return (p1, p2);
         }
     }
-    static void CheckInputs(string p1, string p2)
+    void CheckInputs(string p1, string p2)
     {
         if (p1.Length != p2.Length)
         {
@@ -70,7 +76,7 @@ public class Lab_1
         }
     }
 
-    static int CalcCount(string p1, string p2)
+    int CalcCount(string p1, string p2)
     {
         var res = 0;
 
@@ -107,7 +113,7 @@ public class Lab_1
         return res;
     }
 
-    static void SaveOutput(int count, string outputPath)
+    public void SaveOutput(int count, string outputPath)
     {
         using (var sw = new StreamWriter(outputPath))
         {

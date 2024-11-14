@@ -1,4 +1,4 @@
-﻿namespace Lab_4_LabLib
+﻿namespace LabLib
 {
     public class Lab_3
     {
@@ -10,24 +10,31 @@
             new Point(-1, 2), new Point(-2, 1)
         };
 
-        public static void Do(string inputPath, string outputPath)
+        public uint N { get; private set; }
+        public Point Start { get; private set; }
+        public Point End { get; private set; }
+
+        public Lab_3(string inputPath)
         {
             var inputs = ReadInput(inputPath);
 
-            (var N, var start, var end) = InitInputs(inputs);
+            (N, Start, End) = InitInputs(inputs);
 
             Console.WriteLine($"N: {N}");
-            Console.WriteLine($"Start: {start}");
-            Console.WriteLine($"End: {end}\n");
+            Console.WriteLine($"Start: {Start}");
+            Console.WriteLine($"End: {End}\n");
+        }
 
-            var res = GetResult(N, start, end);
+        public int Do()
+        {
+            var res = GetResult(N, Start, End);
 
             Console.WriteLine($"Result: {res}");
 
-            SaveOutput(res, outputPath);
+            return res;
         }
 
-        static string[] ReadInput(string file)
+        string[] ReadInput(string file)
         {
             using (var sr = new StreamReader(file))
             {
@@ -45,7 +52,7 @@
             }
         }
 
-        static (uint, Point, Point) InitInputs(string[] inputs)
+        (uint, Point, Point) InitInputs(string[] inputs)
         {
             if (inputs.Length != 5)
                 throw new ArgumentException("Input data must consist of 5 elements");
@@ -72,7 +79,7 @@
             return (N, new Point(x1 - 1, y1 - 1), new Point(x2 - 1, y2 - 1));
         }
 
-        static int GetResult(uint N, Point start, Point end)
+        int GetResult(uint N, Point start, Point end)
         {
             var board = new bool[N, N];
 
@@ -104,12 +111,12 @@
             throw new InvalidOperationException("Unable to find result");
         }
 
-        static bool IsInside(uint N, int x, int y)
+        bool IsInside(uint N, int x, int y)
         {
             return x >= 0 && x < N && y >= 0 && y < N;
         }
 
-        static void SaveOutput(int output, string path)
+        public void SaveOutput(int output, string path)
         {
             using (var sw = new StreamWriter(path))
             {

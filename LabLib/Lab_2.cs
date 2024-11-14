@@ -1,23 +1,28 @@
-﻿namespace Lab_4_LabLib
+﻿namespace LabLib
 {
     public class Lab_2
     {
-        public static void Do(string inputPath, string outputPath)
+        public uint N{ get; private set; }
+
+        public Lab_2(string inputPath)
         {
             var nStr = ReadFile(inputPath);
 
-            var n = InitInput(nStr);
+            N = InitInput(nStr);
 
-            Console.WriteLine($"N: {n}");
+            Console.WriteLine($"N: {N}");
+        }
 
-            var output = GetResult((int)n);
+        public ulong Do()
+        {
+            var output = GetResult((int)N);
 
             Console.WriteLine($"Result: {output}");
 
-            SaveOutput(output, outputPath);
+            return output;
         }
 
-        static string ReadFile(string path)
+        string ReadFile(string path)
         {
             using (var sr = new StreamReader(path))
             {
@@ -33,7 +38,7 @@
             }
         }
 
-        static uint InitInput(string input)
+        uint InitInput(string input)
         {
             if (!uint.TryParse(input, out var n))
             {
@@ -83,17 +88,11 @@
                 var i5 = item * 5;
 
                 if (!data.Contains(i2))
-                {
                     data.Add(i2);
-                }
                 if (!data.Contains(i3))
-                {
                     data.Add(i3);
-                }
                 if (!data.Contains(i5))
-                {
                     data.Add(i5);
-                }
             }
 
             resList.AddRange(data);
@@ -101,7 +100,7 @@
             return data;
         }
 
-        public static void SaveOutput(ulong output, string path)
+        public void SaveOutput(ulong output, string path)
         {
             using (var sw = new StreamWriter(path))
             {

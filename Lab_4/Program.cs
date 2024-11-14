@@ -115,14 +115,24 @@ public class Program
 
                 try
                 {
-                    Action<string, string> labAction = labNum switch
+                    if (labNum == 1)
                     {
-                        1 => Lab_4_LabLib.Lab_1.Do,
-                        2 => Lab_4_LabLib.Lab_2.Do,
-                        _ => Lab_4_LabLib.Lab_3.Do
-                    };
-
-                    labAction(inputFilePath, outputFilePath);
+                        var labObj = new LabLib.Lab_1(inputFilePath);
+                        var res = labObj.Do();
+                        labObj.SaveOutput(res, outputFilePath);
+                    }
+                    else if (labNum == 2)
+                    {
+                        var labObj = new LabLib.Lab_2(inputFilePath);
+                        var res = labObj.Do();
+                        labObj.SaveOutput(res, outputFilePath);
+                    }
+                    else
+                    {
+                        var labObj = new LabLib.Lab_3(inputFilePath);
+                        var res = labObj.Do();
+                        labObj.SaveOutput(res, outputFilePath);
+                    }
 
                     return HandleInputsResult.Success;
                 }
