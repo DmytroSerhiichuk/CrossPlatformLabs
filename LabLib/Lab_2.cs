@@ -12,6 +12,12 @@
 
             Console.WriteLine($"N: {N}");
         }
+        public Lab_2(string n, bool temp)
+        {
+			N = InitInput(n);
+
+			Console.WriteLine($"N: {N}");
+		}
 
         public ulong Do()
         {

@@ -1,0 +1,50 @@
+﻿@model Lab_5.Models.SignUpViewModel
+
+@{
+	ViewData["Title"] = "Sign Up";
+}
+
+<div class="text-center">
+	<h1 class="display-4 pb-3">Sign Up</h1>
+	<form asp-action="SignUp" method="post" class="text-start">
+		<div class="form-group mb-3">
+			<label asp-for="UserName" class="form-label"></label>
+			<input asp-for="UserName" class="form-control"/>
+			<span asp-validation-for="UserName" class="text-danger"></span>
+		</div>
+		<div class="form-group mb-3">
+			<label asp-for="FullName" class="form-label"></label>
+			<input asp-for="FullName" class="form-control" />
+			<span asp-validation-for="FullName" class="text-danger"></span>
+		</div>
+		<div class="form-group mb-3">
+			<label asp-for="PhoneNumber" class="form-label"></label>
+			<input asp-for="PhoneNumber" class="form-control" />
+			<span asp-validation-for="PhoneNumber" class="text-danger"></span>
+		</div>
+		<div class="form-group mb-3">
+			<label asp-for="Email" class="form-label"></label>
+			<input asp-for="Email" class="form-control" />
+			<span asp-validation-for="Email" class="text-danger"></span>
+		</div>
+		<div class="form-group mb-3">
+			<label asp-for="Password" class="form-label"></label>
+			<input asp-for="Password" class="form-control" />
+			<span asp-validation-for="Password" class="text-danger"></span>
+		</div>
+		<div class="form-group mb-3">
+			<label asp-for="PasswordConfirm" class="form-label"></label>
+			<input asp-for="PasswordConfirm" class="form-control" />
+			<span asp-validation-for="PasswordConfirm" class="text-danger"></span>
+		</div>
+		<button type="submit" class="btn btn-primary">Sign Up</button>
+		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+	</form>
+</div>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}
+

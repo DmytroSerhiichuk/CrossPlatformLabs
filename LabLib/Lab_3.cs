@@ -24,6 +24,14 @@
             Console.WriteLine($"Start: {Start}");
             Console.WriteLine($"End: {End}\n");
         }
+        public Lab_3(string n, string x1, string y1, string x2, string y2)
+        {
+            (N, Start, End) = InitInputs(new string[] { n, x1, y1, x2, y2 });
+
+			Console.WriteLine($"N: {N}");
+			Console.WriteLine($"Start: {Start}");
+			Console.WriteLine($"End: {End}\n");
+		}
 
         public int Do()
         {

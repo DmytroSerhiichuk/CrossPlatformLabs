@@ -27,6 +27,17 @@ public class Lab_1
         Console.WriteLine($"p1 = {P1}");
         Console.WriteLine($"p2 = {P2}");
     }
+    public Lab_1(string p1, string p2)
+    {
+        P1 = p1;
+        P2 = p2;
+
+		CheckInputs(P1, P2);
+
+		Console.WriteLine($"p1 = {P1}");
+		Console.WriteLine($"p2 = {P2}");
+	}
+
 
     public int Do()
     {

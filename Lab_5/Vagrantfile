@@ -3,7 +3,7 @@ Vagrant.configure("2") do |config|
     config.vm.box_check_update = false
     
     config.vm.network "public_network", use_dhcp_assigned_default_route: true
-    config.vm.network "forwarded_port", guest: 5000, host: 5000
+    config.vm.network "forwarded_port", guest: 3000, host: 5000
 
     config.vm.provider "virtualbox" do |vb|
         vb.memory = "6144"
@@ -11,7 +11,8 @@ Vagrant.configure("2") do |config|
         config.vm.boot_timeout = 1200
     end
 
-    config.vm.provision "file", source: "../../nuget/nuget.config", destination: "/home/vagrant/nuget.config"
+    config.vm.synced_folder ".", "/home/vagrant/Lab_5", type: "virtualbox"
+    config.vm.synced_folder "../LabLib", "/home/vagrant/LabLib", type: "virtualbox"
     
     config.vm.provision "shell", inline: <<-SHELL
         sudo apt-get update -y
@@ -27,7 +28,7 @@ Vagrant.configure("2") do |config|
         echo 'export PATH=$PATH:$HOME/.dotnet/tools' >> ~/.bashrc
         export PATH=$PATH:$HOME/.dotnet/tools
 
-        dotnet new tool-manifest
-        dotnet tool install dserhiichuk --version 1.0.0 --configfile /home/vagrant/nuget.config
+        cd /home/vagrant/Lab_5
+        dotnet run Lab_5.csproj
     SHELL
 end
