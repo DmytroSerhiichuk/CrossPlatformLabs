@@ -1,5 +1,7 @@
 using Lab_6;
+using Lab_6.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,6 +30,13 @@ builder.Services
 	});
 
 builder.Services.AddAuthorization();
+
+// Entity
+// TODO: Add other database types
+builder.Services.AddDbContext<BookingDbContext>(options =>
+{
+	options.UseInMemoryDatabase("Lab_6");
+});
 
 var app = builder.Build();
 
