@@ -1,5 +1,6 @@
-﻿using Lab_5.Services;
+﻿using Lab_5.HttpClients;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.Extensions.Options;
 using System.Security.Claims;
 
 namespace Lab_5.Middleware
@@ -7,17 +8,19 @@ namespace Lab_5.Middleware
 	public class AuthMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly Auth0Service _auth0Service;
+        private readonly Auth0HttpClient _auth0Service;
+		private readonly AuthConfig _authConfig;
 
-        public AuthMiddleware(RequestDelegate next, Auth0Service auth0Service)
+		public AuthMiddleware(RequestDelegate next, Auth0HttpClient auth0Service, IOptions<AuthConfig> options)
         {
             _next = next;
             _auth0Service = auth0Service;
-        }
+			_authConfig = options.Value;
+		}
 
         public async Task InvokeAsync(HttpContext context)
         {
-            var token = context.Request.Cookies["access_token"];
+            var token = context.Request.Cookies[_authConfig.CookieName];
 
             if (!string.IsNullOrEmpty(token))
             {

@@ -1,37 +1,30 @@
 ﻿using Lab_5.Models;
+using Microsoft.Extensions.Options;
 using System.Text.Json;
 
-namespace Lab_5.Services
+namespace Lab_5.HttpClients
 {
-	public class Auth0Service
+	public class Auth0HttpClient
     {
         private readonly HttpClient _httpClient;
 
-        private readonly string _domain;
-        private readonly string _clientId;
-        private readonly string _clientSecret;
-        private readonly string _audience;
-        private readonly string _connection;
+        private readonly AuthConfig _authConfig;
 
-        public Auth0Service(HttpClient httpClient, IConfiguration configuration)
+        public Auth0HttpClient(HttpClient httpClient, IOptions<AuthConfig> options)
         {
             _httpClient = httpClient;
 
-            _domain = configuration["Auth0:Domain"];
-            _clientId = configuration["Auth0:ClientId"];
-            _clientSecret = configuration["Auth0:ClientSecret"];
-            _audience = configuration["Auth0:Audience"];
-            _connection = configuration["Auth0:Connection"];
+			_authConfig = options.Value;
         }
 
         public async Task<string> GetManagementApiTokenAsync()
         {
-            var tokenEndpoint = $"https://{_domain}/oauth/token";
+            var tokenEndpoint = $"https://{_authConfig.Domain}/oauth/token";
             var tokenRequest = new
             {
-                client_id = _clientId,
-                client_secret = _clientSecret,
-                audience = _audience,
+                client_id = _authConfig.ClientId,
+                client_secret = _authConfig.ClientSecret,
+                audience = _authConfig.Audience,
                 grant_type = "client_credentials"
             };
 
@@ -45,7 +38,7 @@ namespace Lab_5.Services
         public async Task CreateUserAsync(SignUpViewModel model)
         {
             var token = await GetManagementApiTokenAsync();
-            var requestUrl = $"https://{_domain}/api/v2/users";
+            var requestUrl = $"https://{_authConfig.Domain}/api/v2/users";
 
             var request = new HttpRequestMessage(HttpMethod.Post, requestUrl);
             request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
@@ -55,7 +48,7 @@ namespace Lab_5.Services
                 nickname = model.UserName,
                 name = model.FullName,
                 password = model.Password,
-                connection = _connection,
+                connection = _authConfig.Connection,
                 email = model.Email,
                 email_verified = false,
                 phone_number = model.PhoneNumber,
@@ -68,7 +61,7 @@ namespace Lab_5.Services
 
         public async Task<string> AuthenticateUserAsync(string email, string password)
         {
-            var requestUrl = $"https://{_domain}/oauth/token";
+            var requestUrl = $"https://{_authConfig.Domain}/oauth/token";
             var request = new HttpRequestMessage(HttpMethod.Post, requestUrl);
 
             request.Content = JsonContent.Create(new
@@ -76,9 +69,9 @@ namespace Lab_5.Services
                 grant_type = "password",
                 username = email,
                 password = password,
-                audience = _audience,
-                client_id = _clientId,
-                client_secret = _clientSecret,
+                audience = _authConfig.Audience,
+                client_id = _authConfig.ClientId,
+                client_secret = _authConfig.ClientSecret,
                 scope = "openid profile email phone"
             });
 
@@ -91,7 +84,7 @@ namespace Lab_5.Services
 
         public async Task<JsonElement> GetUserInfoAsync(string token)
         {
-            var requestUrl = $"https://{_domain}/userinfo";
+            var requestUrl = $"https://{_authConfig.Domain}/userinfo";
             var request = new HttpRequestMessage(HttpMethod.Get, requestUrl);
             request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 

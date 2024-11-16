@@ -1,12 +1,17 @@
+using Lab_5;
+using Lab_5.HttpClients;
 using Lab_5.Middleware;
-using Lab_5.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.Configure<AuthConfig>(builder.Configuration.GetSection("Auth0"));
+var appConfig = builder.Configuration.GetSection("Auth0").Get<AuthConfig>();
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddHttpClient<Auth0Service>();
+builder.Services.AddHttpClient<Auth0HttpClient>();
+builder.Services.AddHttpClient<Lab6HttpClient>();
 
 builder.Services
     .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -15,7 +20,7 @@ builder.Services
         options.LoginPath = "/Account/Login";
         options.ExpireTimeSpan = TimeSpan.FromHours(1);
         options.SlidingExpiration = true;
-        options.Cookie.Name = "access_token";
+        options.Cookie.Name = appConfig.CookieName;
     });
 
 builder.Services.AddAuthorization();

@@ -1,20 +1,26 @@
-﻿using Lab_5.Models;
-using Lab_5.Services;
+﻿using Lab_5.HttpClients;
+using Lab_5.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace Lab_5.Controllers
 {
 	public class AccountController : Controller
     {
-        private readonly Auth0Service _auth0Service;
+        private readonly Auth0HttpClient _auth0Service;
 
-        public AccountController(Auth0Service auth0Service)
+		private readonly AuthConfig _authConfig;
+
+		public AccountController(Auth0HttpClient auth0Service, IOptions<AuthConfig> options)
         {
             _auth0Service = auth0Service;
-        }
+
+			_authConfig = options.Value;
+
+		}
 
         [HttpGet]
         public IActionResult Login()
@@ -93,7 +99,7 @@ namespace Lab_5.Controllers
                 Expires = DateTime.UtcNow.AddHours(1)
             };
 
-            Response.Cookies.Append("access_token", token, cookieOptions);
+            Response.Cookies.Append(_authConfig.CookieName, token, cookieOptions);
         }
 
 
@@ -102,7 +108,7 @@ namespace Lab_5.Controllers
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            Response.Cookies.Delete("access_token");
+            Response.Cookies.Delete(_authConfig.CookieName);
             return RedirectToAction("Index", "Home");
         }
     }
