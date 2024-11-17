@@ -1,5 +1,4 @@
-﻿using System.Text.Json;
-
+﻿using Lab_5.Models;
 namespace Lab_5.HttpClients
 {
 	public class Lab6HttpClient
@@ -16,10 +15,9 @@ namespace Lab_5.HttpClients
 			_lab6Url = configuration["Lab6:Url"];
 		}
 
-		// test request
-		public async Task<JsonElement> GetTest(string token)
+		public async Task<List<Vehicle>> GetVehicles(string token)
 		{
-			var requestUrl = $"{_lab6Url}/api/test";
+			var requestUrl = $"{_lab6Url}/api/vehicles";
 			var request = new HttpRequestMessage(HttpMethod.Get, requestUrl);
 
 			request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
@@ -27,7 +25,7 @@ namespace Lab_5.HttpClients
 			var response = await _httpClient.SendAsync(request);
 			response.EnsureSuccessStatusCode();
 
-			return await response.Content.ReadFromJsonAsync<JsonElement>();
+			return await response.Content.ReadFromJsonAsync<List<Vehicle>>();
 		}
 	}
 }

@@ -1,43 +1,47 @@
 ﻿using Lab_5.HttpClients;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
-// Only for connection test
 namespace Lab_5.Controllers
 {
-	[ApiController]
-	[Route("db")]
-	public class DBController : Controller
+	[Authorize]
+	[Route("Db")]
+	public class DbController : Controller
 	{
 		private readonly Lab6HttpClient _lab6HttpClient;
 		private readonly AuthConfig _authConfig;
 
-		public DBController(Lab6HttpClient lab6HttpClient, IOptions<AuthConfig> options)
+		public DbController(Lab6HttpClient lab6HttpClient, IOptions<AuthConfig> options)
         {
 			_lab6HttpClient = lab6HttpClient;
 			_authConfig = options.Value;
 		}
 
-		[HttpGet("")]
-        public async Task<IActionResult> Index()
+		[HttpGet("Vehicles")]
+        public async Task<IActionResult> GetVehicles()
 		{
-			var token = Request.Cookies[_authConfig.CookieName];
+			var token = GetToken();
 
-			if (String.IsNullOrEmpty(token))
-			{
-				return RedirectToAction("Login", "Account");
-			}
+			var res = await _lab6HttpClient.GetVehicles(token);
 
-			try
-			{
-				var res = await _lab6HttpClient.GetTest(token);
+			return Ok(res);
 
-				return Ok(res.GetProperty("name"));
-			}
-			catch
-			{
-				return RedirectToAction("Login", "Account");
-			}
+			//try
+			//{
+			//	var res = await _lab6HttpClient.GetVehicles(token);
+
+			//	return Ok(res);
+			//}
+			//catch
+			//{
+			//	return RedirectToAction("Login", "Account");
+			//}
+		}
+
+		private string GetToken()
+		{
+			return Request.Cookies[_authConfig.CookieName] ?? "";
 		}
 	}
 }

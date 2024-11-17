@@ -56,16 +56,16 @@ namespace Lab_6.Models
 		private void GenerateData(ModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<BookingStatus>().HasData(
-				new BookingStatus { Code = "NEW", Description = "New booking" },
-				new BookingStatus { Code = "CONF", Description = "Confirmed booking" },
-				new BookingStatus { Code = "CANC", Description = "Cancelled booking" },
-				new BookingStatus { Code = "PEND", Description = "Pending booking" },
-				new BookingStatus { Code = "COMP", Description = "Completed booking" },
-				new BookingStatus { Code = "WAIT", Description = "Waiting for confirmation" },
-				new BookingStatus { Code = "HOLD", Description = "Booking on hold" },
-				new BookingStatus { Code = "PAID", Description = "Payment received" },
-				new BookingStatus { Code = "EXPIRED", Description = "Booking expired" },
-				new BookingStatus { Code = "NO_SHOW", Description = "No-show (customer did not arrive)" }
+				new BookingStatus { Code = "NEW", Description = "New" },
+				new BookingStatus { Code = "CON", Description = "Confirmed" },
+				new BookingStatus { Code = "CAN", Description = "Cancelled" },
+				new BookingStatus { Code = "PEN", Description = "Pending" },
+				new BookingStatus { Code = "COM", Description = "Completed" },
+				new BookingStatus { Code = "WAI", Description = "Waiting" },
+				new BookingStatus { Code = "HOL", Description = "On hold" },
+				new BookingStatus { Code = "PAI", Description = "Paid" },
+				new BookingStatus { Code = "EXP", Description = "Expired" },
+				new BookingStatus { Code = "NOS", Description = "No-show" }
 			);
 
 			modelBuilder.Entity<Customer>().HasData(
@@ -113,25 +113,25 @@ namespace Lab_6.Models
 
 			modelBuilder.Entity<Booking>().HasData(
 				new Booking { Id = 1, DateFrom = DateTime.Parse("2024-11-01"), DateTo = DateTime.Parse("2024-11-05"), IsConfirmationLetterSent = "Y", IsPaymentReceived = "Y", BookingStatusCode = "NEW", VehicleRegNumber = "ABC123", CustomerId = 1 },
-				new Booking { Id = 2, DateFrom = DateTime.Parse("2024-11-10"), DateTo = DateTime.Parse("2024-11-15"), IsConfirmationLetterSent = "Y", IsPaymentReceived = "N", BookingStatusCode = "CONF", VehicleRegNumber = "XYZ987", CustomerId = 2 },
-				new Booking { Id = 3, DateFrom = DateTime.Parse("2024-11-20"), DateTo = DateTime.Parse("2024-11-25"), IsConfirmationLetterSent = "N", IsPaymentReceived = "Y", BookingStatusCode = "CANC", VehicleRegNumber = "LMN456", CustomerId = 3 },
-				new Booking { Id = 4, DateFrom = DateTime.Parse("2024-12-01"), DateTo = DateTime.Parse("2024-12-03"), IsConfirmationLetterSent = "Y", IsPaymentReceived = "Y", BookingStatusCode = "PEND", VehicleRegNumber = "PQR789", CustomerId = 4 },
-				new Booking { Id = 5, DateFrom = DateTime.Parse("2024-12-05"), DateTo = DateTime.Parse("2024-12-10"), IsConfirmationLetterSent = "N", IsPaymentReceived = "Y", BookingStatusCode = "WAIT", VehicleRegNumber = "DEF234", CustomerId = 5 },
-				new Booking { Id = 6, DateFrom = DateTime.Parse("2024-12-10"), DateTo = DateTime.Parse("2024-12-15"), IsConfirmationLetterSent = "Y", IsPaymentReceived = "N", BookingStatusCode = "CONF", VehicleRegNumber = "GHI567", CustomerId = 6 },
-				new Booking { Id = 7, DateFrom = DateTime.Parse("2024-12-12"), DateTo = DateTime.Parse("2024-12-18"), IsConfirmationLetterSent = "Y", IsPaymentReceived = "Y", BookingStatusCode = "COMP", VehicleRegNumber = "ABC123", CustomerId = 7 },
-				new Booking { Id = 8, DateFrom = DateTime.Parse("2024-12-15"), DateTo = DateTime.Parse("2024-12-20"), IsConfirmationLetterSent = "N", IsPaymentReceived = "N", BookingStatusCode = "EXPIRED", VehicleRegNumber = "XYZ987", CustomerId = 8 },
+				new Booking { Id = 2, DateFrom = DateTime.Parse("2024-11-10"), DateTo = DateTime.Parse("2024-11-15"), IsConfirmationLetterSent = "Y", IsPaymentReceived = "N", BookingStatusCode = "CON", VehicleRegNumber = "XYZ987", CustomerId = 2 },
+				new Booking { Id = 3, DateFrom = DateTime.Parse("2024-11-20"), DateTo = DateTime.Parse("2024-11-25"), IsConfirmationLetterSent = "N", IsPaymentReceived = "Y", BookingStatusCode = "CAN", VehicleRegNumber = "LMN456", CustomerId = 3 },
+				new Booking { Id = 4, DateFrom = DateTime.Parse("2024-12-01"), DateTo = DateTime.Parse("2024-12-03"), IsConfirmationLetterSent = "Y", IsPaymentReceived = "Y", BookingStatusCode = "PEN", VehicleRegNumber = "PQR789", CustomerId = 4 },
+				new Booking { Id = 5, DateFrom = DateTime.Parse("2024-12-05"), DateTo = DateTime.Parse("2024-12-10"), IsConfirmationLetterSent = "N", IsPaymentReceived = "Y", BookingStatusCode = "WAI", VehicleRegNumber = "DEF234", CustomerId = 5 },
+				new Booking { Id = 6, DateFrom = DateTime.Parse("2024-12-10"), DateTo = DateTime.Parse("2024-12-15"), IsConfirmationLetterSent = "Y", IsPaymentReceived = "N", BookingStatusCode = "CON", VehicleRegNumber = "GHI567", CustomerId = 6 },
+				new Booking { Id = 7, DateFrom = DateTime.Parse("2024-12-12"), DateTo = DateTime.Parse("2024-12-18"), IsConfirmationLetterSent = "Y", IsPaymentReceived = "Y", BookingStatusCode = "COM", VehicleRegNumber = "ABC123", CustomerId = 7 },
+				new Booking { Id = 8, DateFrom = DateTime.Parse("2024-12-15"), DateTo = DateTime.Parse("2024-12-20"), IsConfirmationLetterSent = "N", IsPaymentReceived = "N", BookingStatusCode = "EXP", VehicleRegNumber = "XYZ987", CustomerId = 8 },
 				new Booking { Id = 9, DateFrom = DateTime.Parse("2024-12-18"), DateTo = DateTime.Parse("2024-12-22"), IsConfirmationLetterSent = "Y", IsPaymentReceived = "Y", BookingStatusCode = "NEW", VehicleRegNumber = "LMN456", CustomerId = 9 },
-				new Booking { Id = 10, DateFrom = DateTime.Parse("2024-12-20"), DateTo = DateTime.Parse("2024-12-25"), IsConfirmationLetterSent = "N", IsPaymentReceived = "Y", BookingStatusCode = "CANC", VehicleRegNumber = "PQR789", CustomerId = 10 },
-				new Booking { Id = 11, DateFrom = DateTime.Parse("2024-12-22"), DateTo = DateTime.Parse("2024-12-27"), IsConfirmationLetterSent = "Y", IsPaymentReceived = "N", BookingStatusCode = "PEND", VehicleRegNumber = "DEF234", CustomerId = 1 },
-				new Booking { Id = 12, DateFrom = DateTime.Parse("2024-12-25"), DateTo = DateTime.Parse("2024-12-30"), IsConfirmationLetterSent = "Y", IsPaymentReceived = "Y", BookingStatusCode = "WAIT", VehicleRegNumber = "GHI567", CustomerId = 2 },
-				new Booking { Id = 13, DateFrom = DateTime.Parse("2025-01-01"), DateTo = DateTime.Parse("2025-01-07"), IsConfirmationLetterSent = "N", IsPaymentReceived = "Y", BookingStatusCode = "CONF", VehicleRegNumber = "ABC123", CustomerId = 3 },
-				new Booking { Id = 14, DateFrom = DateTime.Parse("2025-01-05"), DateTo = DateTime.Parse("2025-01-10"), IsConfirmationLetterSent = "Y", IsPaymentReceived = "N", BookingStatusCode = "COMP", VehicleRegNumber = "XYZ987", CustomerId = 4 },
-				new Booking { Id = 15, DateFrom = DateTime.Parse("2025-01-10"), DateTo = DateTime.Parse("2025-01-15"), IsConfirmationLetterSent = "Y", IsPaymentReceived = "Y", BookingStatusCode = "EXPIRED", VehicleRegNumber = "LMN456", CustomerId = 5 },
-				new Booking { Id = 16, DateFrom = DateTime.Parse("2025-01-12"), DateTo = DateTime.Parse("2025-01-17"), IsConfirmationLetterSent = "N", IsPaymentReceived = "Y", BookingStatusCode = "WAIT", VehicleRegNumber = "PQR789", CustomerId = 6 },
-				new Booking { Id = 17, DateFrom = DateTime.Parse("2025-01-15"), DateTo = DateTime.Parse("2025-01-20"), IsConfirmationLetterSent = "Y", IsPaymentReceived = "N", BookingStatusCode = "PEND", VehicleRegNumber = "DEF234", CustomerId = 7 },
+				new Booking { Id = 10, DateFrom = DateTime.Parse("2024-12-20"), DateTo = DateTime.Parse("2024-12-25"), IsConfirmationLetterSent = "N", IsPaymentReceived = "Y", BookingStatusCode = "CAN", VehicleRegNumber = "PQR789", CustomerId = 10 },
+				new Booking { Id = 11, DateFrom = DateTime.Parse("2024-12-22"), DateTo = DateTime.Parse("2024-12-27"), IsConfirmationLetterSent = "Y", IsPaymentReceived = "N", BookingStatusCode = "PEN", VehicleRegNumber = "DEF234", CustomerId = 1 },
+				new Booking { Id = 12, DateFrom = DateTime.Parse("2024-12-25"), DateTo = DateTime.Parse("2024-12-30"), IsConfirmationLetterSent = "Y", IsPaymentReceived = "Y", BookingStatusCode = "WAI", VehicleRegNumber = "GHI567", CustomerId = 2 },
+				new Booking { Id = 13, DateFrom = DateTime.Parse("2025-01-01"), DateTo = DateTime.Parse("2025-01-07"), IsConfirmationLetterSent = "N", IsPaymentReceived = "Y", BookingStatusCode = "CON", VehicleRegNumber = "ABC123", CustomerId = 3 },
+				new Booking { Id = 14, DateFrom = DateTime.Parse("2025-01-05"), DateTo = DateTime.Parse("2025-01-10"), IsConfirmationLetterSent = "Y", IsPaymentReceived = "N", BookingStatusCode = "COM", VehicleRegNumber = "XYZ987", CustomerId = 4 },
+				new Booking { Id = 15, DateFrom = DateTime.Parse("2025-01-10"), DateTo = DateTime.Parse("2025-01-15"), IsConfirmationLetterSent = "Y", IsPaymentReceived = "Y", BookingStatusCode = "EXP", VehicleRegNumber = "LMN456", CustomerId = 5 },
+				new Booking { Id = 16, DateFrom = DateTime.Parse("2025-01-12"), DateTo = DateTime.Parse("2025-01-17"), IsConfirmationLetterSent = "N", IsPaymentReceived = "Y", BookingStatusCode = "WAI", VehicleRegNumber = "PQR789", CustomerId = 6 },
+				new Booking { Id = 17, DateFrom = DateTime.Parse("2025-01-15"), DateTo = DateTime.Parse("2025-01-20"), IsConfirmationLetterSent = "Y", IsPaymentReceived = "N", BookingStatusCode = "PEN", VehicleRegNumber = "DEF234", CustomerId = 7 },
 				new Booking { Id = 18, DateFrom = DateTime.Parse("2025-01-18"), DateTo = DateTime.Parse("2025-01-22"), IsConfirmationLetterSent = "Y", IsPaymentReceived = "Y", BookingStatusCode = "NEW", VehicleRegNumber = "GHI567", CustomerId = 8 },
-				new Booking { Id = 19, DateFrom = DateTime.Parse("2025-01-22"), DateTo = DateTime.Parse("2025-01-27"), IsConfirmationLetterSent = "N", IsPaymentReceived = "Y", BookingStatusCode = "CANC", VehicleRegNumber = "ABC123", CustomerId = 9 },
-				new Booking { Id = 20, DateFrom = DateTime.Parse("2025-01-25"), DateTo = DateTime.Parse("2025-01-30"), IsConfirmationLetterSent = "Y", IsPaymentReceived = "N", BookingStatusCode = "CONF", VehicleRegNumber = "XYZ987", CustomerId = 10 }
+				new Booking { Id = 19, DateFrom = DateTime.Parse("2025-01-22"), DateTo = DateTime.Parse("2025-01-27"), IsConfirmationLetterSent = "N", IsPaymentReceived = "Y", BookingStatusCode = "CAN", VehicleRegNumber = "ABC123", CustomerId = 9 },
+				new Booking { Id = 20, DateFrom = DateTime.Parse("2025-01-25"), DateTo = DateTime.Parse("2025-01-30"), IsConfirmationLetterSent = "Y", IsPaymentReceived = "N", BookingStatusCode = "CON", VehicleRegNumber = "XYZ987", CustomerId = 10 }
 			);
 
 		}

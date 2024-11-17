@@ -9,6 +9,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("Auth0"));
 var appSettings = builder.Configuration.GetSection("Auth0").Get<AppSettings>();
 
+// Entity
+// TODO: Add other database types
+builder.Services.AddDbContext<BookingDbContext>(options =>
+{
+	options.UseNpgsql(@$"Host=localhost;Username=postgres;Password=qwerty;Database=Lab_6");	
+});
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -30,13 +37,6 @@ builder.Services
 	});
 
 builder.Services.AddAuthorization();
-
-// Entity
-// TODO: Add other database types
-builder.Services.AddDbContext<BookingDbContext>(options =>
-{
-	options.UseInMemoryDatabase("Lab_6");
-});
 
 var app = builder.Build();
 
