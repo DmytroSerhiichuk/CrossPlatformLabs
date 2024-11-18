@@ -1,0 +1,43 @@
+﻿@model Lab_5.ResponseModels.BookingStatusResponseDetailed
+
+@{
+    ViewData["Title"] = "Booking Status";
+}
+
+<h2>Booking Status</h2>
+
+@if (Model == null)
+{
+    <p>Такого елемента не існує</p>
+}
+else
+{
+    <ul>
+        <li class="list-group-item"><strong>Code:</strong> @Model.Code</li>
+        <li class="list-group-item"><strong>Description:</strong> @Model.Description</li>
+        <li class="list-group-item">
+            <h3>Bookings:</h3>
+            <div class="row">
+                @foreach (var booking in Model.Bookings)
+                {
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Id: @booking.Id</h5>
+                                <ul class="list-unstyled">
+                                    <li class="list-group-item"><strong>Date From:</strong> @booking.DateFrom.ToString("dd/MM/yyyy")</li>
+                                    <li class="list-group-item"><strong>Date To:</strong> @booking.DateTo.ToString("dd/MM/yyyy")</li>
+                                    <li class="list-group-item"><strong>Confirmation Letter Sent:</strong> @booking.IsConfirmationLetterSent</li>
+                                    <li class="list-group-item"><strong>Payment Received:</strong> @booking.IsPaymentReceived</li>
+                                    <li class="list-group-item"><strong>Booking Status Code:</strong> @booking.BookingStatusCode</li>
+                                    <li class="list-group-item"><strong>Vehicle Reg Number:</strong> @booking.VehicleRegNumber</li>
+                                    <li class="list-group-item"><strong>Customer Id:</strong> @booking.CustomerId</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </li>
+    </ul>
+}

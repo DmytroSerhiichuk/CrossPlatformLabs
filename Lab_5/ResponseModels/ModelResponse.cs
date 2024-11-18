@@ -1,13 +1,10 @@
-﻿namespace Lab_5.Models
+﻿namespace Lab_5.ResponseModels
 {
-	public class Model
+	public class ModelResponse
 	{
 		public string Code { get; set; }
-
 		public decimal DailyHireRate { get; set; }
-
 		public string Name { get; set; }
-
-		public ICollection<Vehicle> Vehicles { get; set; }
+		public int VehicleCount { get; set; }
 	}
 }

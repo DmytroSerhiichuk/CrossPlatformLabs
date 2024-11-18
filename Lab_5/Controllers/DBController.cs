@@ -18,25 +18,104 @@ namespace Lab_5.Controllers
 			_authConfig = options.Value;
 		}
 
-		[HttpGet("Vehicles")]
-        public async Task<IActionResult> GetVehicles()
+		[HttpGet("Bookings")]
+        public async Task<IActionResult> GetBookings()
 		{
 			var token = GetToken();
 
-			var res = await _lab6HttpClient.GetVehicles(token);
+			try
+			{
+				var res = await _lab6HttpClient.GetBookings(token);
 
-			return Ok(res);
+				return View("Bookings", res);
+			}
+			catch
+			{
+				return RedirectToAction("Login", "Account");
+			}
+		}
 
-			//try
-			//{
-			//	var res = await _lab6HttpClient.GetVehicles(token);
+		[HttpGet("Booking/{id}")]
+		public async Task<IActionResult> GetBooking(int id)
+		{
+			var token = GetToken();
 
-			//	return Ok(res);
-			//}
-			//catch
-			//{
-			//	return RedirectToAction("Login", "Account");
-			//}
+			try
+			{
+				var res = await _lab6HttpClient.GetBooking(token, id);
+
+				return View("Booking", res);
+			}
+			catch
+			{
+				return RedirectToAction("Login", "Account");
+			}
+		}
+
+        [HttpGet("Models")]
+        public async Task<IActionResult> GetModels()
+        {
+            var token = GetToken();
+
+            try
+            {
+                var res = await _lab6HttpClient.GetModels(token);
+
+                return View("Models", res);
+            }
+            catch
+            {
+                return RedirectToAction("Login", "Account");
+            }
+        }
+		[HttpGet("Model/{code}")]
+		public async Task<IActionResult> GetModel(string code)
+		{
+			var token = GetToken();
+
+			try
+			{
+				var res = await _lab6HttpClient.GetModel(token, code);
+
+				return View("Model", res);
+			}
+			catch
+			{
+				return RedirectToAction("Login", "Account");
+			}
+		}
+
+		[HttpGet("BookingStatuses")]
+		public async Task<IActionResult> GetBookingStatuses()
+		{
+			var token = GetToken();
+
+			try
+			{
+				var res = await _lab6HttpClient.GetBookingStatuses(token);
+
+				return View("BookingStatuses", res);
+			}
+			catch
+			{
+				return RedirectToAction("Login", "Account");
+			}
+		}
+		[HttpGet("BookingStatus/{code}")]
+		public async Task<IActionResult> GetBookingStatus(string code)
+		{
+			var token = GetToken();
+
+			try
+			{
+				var res = await _lab6HttpClient.GetBookingStatus(token, code);
+
+				return View("BookingStatus", res);
+			}
+			catch
+			{
+				return RedirectToAction("Login", "Account");
+			}
 		}
 
 		private string GetToken()

@@ -1,0 +1,68 @@
+﻿@model Lab_5.ResponseModels.BookingResponseDetailed
+
+@{
+    ViewData["Title"] = "Booking";
+}
+
+<h2>Booking</h2>
+
+@if (Model == null)
+{
+    <p>Такого елемента не існує</p>
+}
+else
+{
+    <ul class="list-group">
+        <!-- Booking Information -->
+        <li class="list-group-item"><strong>Id:</strong> @Model.Id</li>
+        <li class="list-group-item"><strong>Date From:</strong> @Model.DateFrom.ToString("dd/MM/yyyy")</li>
+        <li class="list-group-item"><strong>Date To:</strong> @Model.DateTo.ToString("dd/MM/yyyy")</li>
+        <li class="list-group-item"><strong>Confirmation Letter Sent: @Model.IsConfirmationLetterSent</strong></li>
+        <li class="list-group-item"><strong>Payment Received: @Model.IsPaymentReceived</strong></li>
+
+        <!-- Booking Status Information -->
+        <li class="list-group-item">
+            <strong>Booking Status:</strong>
+            <ul class="list-group ms-3">
+                <li class="list-group-item"><strong>Code:</strong> @Model.BookingStatus.Code</li>
+                <li class="list-group-item"><strong>Description:</strong> @Model.BookingStatus.Description</li>
+                <li class="list-group-item"><strong>Booking Count:</strong> @Model.BookingStatus.BookingCount</li>
+            </ul>
+        </li>
+
+        <!-- Customer Information -->
+        <li class="list-group-item">
+            <strong>Customer:</strong>
+            <ul class="list-group ms-3">
+                <li class="list-group-item"><strong>Id:</strong> @Model.Customer.Id</li>
+                <li class="list-group-item"><strong>Name:</strong> @Model.Customer.Name</li>
+                <li class="list-group-item"><strong>Details:</strong> @Model.Customer.Details</li>
+                <li class="list-group-item"><strong>Gender:</strong> @Model.Customer.Gender</li>
+                <li class="list-group-item"><strong>Email:</strong> @Model.Customer.Email</li>
+                <li class="list-group-item"><strong>Phone:</strong> @Model.Customer.Phone</li>
+                <li class="list-group-item"><strong>Address Line 1:</strong> @Model.Customer.AddressLine1</li>
+                <li class="list-group-item"><strong>Address Line 2:</strong> @Model.Customer.AddressLine2</li>
+                <li class="list-group-item"><strong>Address Line 3:</strong> @Model.Customer.AddressLine3</li>
+                <li class="list-group-item"><strong>Town:</strong> @Model.Customer.Town</li>
+                <li class="list-group-item"><strong>County:</strong> @Model.Customer.County</li>
+                <li class="list-group-item"><strong>Country:</strong> @Model.Customer.Country</li>
+                <li class="list-group-item"><strong>Booking Count:</strong> @Model.Customer.BookingCount</li>
+            </ul>
+        </li>
+
+        <!-- Vehicle Information -->
+        <li class="list-group-item">
+            <strong>Vehicle:</strong>
+            <ul class="list-group ms-3">
+                <li class="list-group-item"><strong>RegNumber:</strong> @Model.Vehicle.RegNumber</li>
+                <li class="list-group-item"><strong>Current Mileage:</strong> @Model.Vehicle.CurrentMileage</li>
+                <li class="list-group-item"><strong>Daily Hire Rate:</strong> @Model.Vehicle.DailyHireRate</li>
+                <li class="list-group-item"><strong>Date Mot Due:</strong> @Model.Vehicle.DateMotDue.ToString("dd/MM/yyyy")</li>
+                <li class="list-group-item"><strong>Manufacturer:</strong> @Model.Vehicle.ManufacturerCode</li>
+                <li class="list-group-item"><strong>Model:</strong> @Model.Vehicle.ModelCode</li>
+                <li class="list-group-item"><strong>Vehicle Category:</strong> @Model.Vehicle.VehicleCategoryCode</li>
+                <li class="list-group-item"><strong>Booking Count:</strong> @Model.Vehicle.BookingCount</li>
+            </ul>
+        </li>
+    </ul>
+}

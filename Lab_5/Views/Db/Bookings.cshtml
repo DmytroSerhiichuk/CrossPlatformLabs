@@ -1,0 +1,37 @@
+﻿@model List<Lab_5.ResponseModels.BookingResponse>
+
+@{
+	ViewData["Title"] = "Bookings";
+}
+
+<h2>Bookings - Список</h2>
+
+<table class="table table-striped table-bordered">
+	<thead>
+		<tr>
+			<th>Id</th>
+			<th>Date From</th>
+			<th>Date To</th>
+			<th>Is Confirmation Letter Sent</th>
+			<th>Is Payment Received</th>
+			<th>Booking Status Code</th>
+			<th>Vehicle Reg Number</th>
+			<th>Customer Id</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var booking in Model)
+		{
+			<tr>
+				<td><a class="nav-link text-dark" asp-area="" asp-controller="Db" asp-action="GetBooking" asp-route-id="@booking.Id">@booking.Id</a></td>
+				<td><a class="nav-link text-dark" asp-area="" asp-controller="Db" asp-action="GetBooking" asp-route-id="@booking.Id">@booking.DateFrom.ToString("dd/MM/yyyy")</a></td>
+				<td><a class="nav-link text-dark" asp-area="" asp-controller="Db" asp-action="GetBooking" asp-route-id="@booking.Id">@booking.DateTo.ToString("dd/MM/yyyy")</a></td>
+				<td><a class="nav-link text-dark" asp-area="" asp-controller="Db" asp-action="GetBooking" asp-route-id="@booking.Id">@booking.IsConfirmationLetterSent</a></td>
+				<td><a class="nav-link text-dark" asp-area="" asp-controller="Db" asp-action="GetBooking" asp-route-id="@booking.Id">@booking.IsPaymentReceived</a></td>
+				<td><a class="nav-link text-dark" asp-area="" asp-controller="Db" asp-action="GetBooking" asp-route-id="@booking.Id">@booking.BookingStatusCode</a></td>
+				<td><a class="nav-link text-dark" asp-area="" asp-controller="Db" asp-action="GetBooking" asp-route-id="@booking.Id">@booking.VehicleRegNumber</a></td>
+				<td><a class="nav-link text-dark" asp-area="" asp-controller="Db" asp-action="GetBooking" asp-route-id="@booking.Id">@booking.CustomerId</a></td>
+			</tr>
+		}
+	</tbody>
+</table>

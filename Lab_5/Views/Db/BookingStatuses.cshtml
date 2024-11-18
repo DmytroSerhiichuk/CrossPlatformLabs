@@ -1,0 +1,27 @@
+﻿@model List<Lab_5.ResponseModels.BookingStatusResponse>
+
+@{
+	ViewData["Title"] = "Booking Statuses";
+}
+
+<h2>Booking Statuses - Список</h2>
+
+<table class="table table-striped table-bordered">
+	<thead>
+		<tr>
+			<th>Code</th>
+			<th>Description</th>
+			<th>Booking Count</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var status in Model)
+		{
+			<tr>
+				<td><a class="nav-link text-dark" asp-area="" asp-controller="Db" asp-action="GetBookingStatus" asp-route-code="@status.Code">@status.Code</a></td>
+				<td><a class="nav-link text-dark" asp-area="" asp-controller="Db" asp-action="GetBookingStatus" asp-route-code="@status.Code">@status.Description</a></td>
+				<td><a class="nav-link text-dark" asp-area="" asp-controller="Db" asp-action="GetBookingStatus" asp-route-code="@status.Code">@status.BookingCount</a></td>
+			</tr>
+		}
+	</tbody>
+</table>
