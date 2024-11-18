@@ -1,4 +1,4 @@
-﻿@model Lab_5.ResponseModels.ModelResponseDetailed
+﻿@model Lab_5.DTO.ModelDetailedDTO
 
 @{
     ViewData["Title"] = "Model";
@@ -28,7 +28,7 @@ else
                                 <ul class="list-unstyled">
                                     <li class="list-group-item"><strong>Current Mileage:</strong> @vehicle.CurrentMileage</li>
                                     <li class="list-group-item"><strong>Daily Hire Rate:</strong> @vehicle.DailyHireRate</li>
-                                    <li class="list-group-item"><strong>Date Mot Due:</strong> @vehicle.DateMotDue.ToString("dd/MM/yyyy")</li>
+                                    <li class="list-group-item"><strong>Date Mot Due:</strong> @vehicle.DateMotDue</li>
                                     <li class="list-group-item"><strong>Manufacturer:</strong> @vehicle.ManufacturerCode</li>
                                     <li class="list-group-item"><strong>Model:</strong> @vehicle.ModelCode</li>
                                     <li class="list-group-item"><strong>Vehicle Category:</strong> @vehicle.VehicleCategoryCode</li>

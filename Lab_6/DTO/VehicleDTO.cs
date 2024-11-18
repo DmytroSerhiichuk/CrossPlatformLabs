@@ -1,6 +1,6 @@
-﻿namespace Lab_5.ResponseModels
+﻿namespace Lab_6.DTO
 {
-	public class VehicleResponse
+	public class VehicleDTO
 	{
 		public string RegNumber { get; set; }
 		public int BookingCount { get; set; }

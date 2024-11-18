@@ -1,0 +1,46 @@
+﻿@model Lab_5.Models.SearchViewModel
+
+@{
+	ViewData["Title"] = "Search";
+}
+
+<div class="text-center">
+	<h1 class="display-4 pb-3">Search:</h1>
+	<form asp-action="Index" method="post" class="text-start">
+		<h5>Пошук елементів з таблиці Booking</h5>
+		<div class="form-group mb-3">
+			<label asp-for="DateFrom" class="form-label">Booking - Date From:</label>
+			<input asp-for="DateFrom" class="form-control" />
+			<span asp-validation-for="DateFrom" class="text-danger"></span>
+		</div>
+		<div class="form-group mb-3">
+			<label asp-for="DateTo" class="form-label">Booking - Date To:</label>
+			<input asp-for="DateTo" class="form-control" />
+			<span asp-validation-for="DateTo" class="text-danger"></span>
+		</div>
+		<div class="form-group mb-3">
+			<label asp-for="Items" class="form-label">Vehicle - Reg Numbers (Пошук за регістраційними номерами авто. Розділяти комами):</label>
+			<input asp-for="Items" class="form-control" />
+			<span asp-validation-for="Items" class="text-danger"></span>
+		</div>
+		<div class="form-group mb-3">
+			<label asp-for="StartsWith" class="form-label">Customer - Name (Starts With):</label>
+			<input asp-for="StartsWith" class="form-control" />
+			<span asp-validation-for="StartsWith" class="text-danger"></span>
+		</div>
+		<div class="form-group mb-3">
+			<label asp-for="StartsWith" class="form-label">Customer - Name (Ends With):</label>
+			<input asp-for="StartsWith" class="form-control" />
+			<span asp-validation-for="StartsWith" class="text-danger"></span>
+		</div>
+
+		<button type="submit" class="btn btn-primary">Search</button>
+		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+	</form>
+</div>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

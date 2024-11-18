@@ -1,5 +1,4 @@
-﻿using Lab_5.ResponseModels;
-namespace Lab_5.HttpClients
+﻿namespace Lab_5.HttpClients
 {
 	public class Lab6HttpClient
 	{
@@ -15,9 +14,9 @@ namespace Lab_5.HttpClients
 			_lab6Url = configuration["Lab6:Url"];
 		}
 
-		public async Task<T> GetData<T>(string token, string url, string parametersUrl = "")
+		public async Task<T> GetData<T>(string token, string url)
 		{
-            var requestUrl = $"{_lab6Url}/api/{url}/{parametersUrl}";
+            var requestUrl = $"{_lab6Url}/api/{url}";
             var request = new HttpRequestMessage(HttpMethod.Get, requestUrl);
 
             request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
@@ -26,6 +25,6 @@ namespace Lab_5.HttpClients
             response.EnsureSuccessStatusCode();
 
             return await response.Content.ReadFromJsonAsync<T>();
-        }
+        }		
 	}
 }

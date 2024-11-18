@@ -1,5 +1,5 @@
 ﻿using Lab_5.HttpClients;
-using Lab_5.ResponseModels;
+using Lab_5.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -26,7 +26,7 @@ namespace Lab_5.Controllers
 
 			try
 			{
-				var res = await _lab6HttpClient.GetData<List<BookingResponse>>(token, "bookings");
+				var res = await _lab6HttpClient.GetData<List<BookingDTO>>(token, "bookings");
 
 				return View("Bookings", res);
 			}
@@ -43,7 +43,7 @@ namespace Lab_5.Controllers
 
 			try
 			{
-				var res = await _lab6HttpClient.GetData<BookingResponseDetailed>(token, "booking", $"{id}");
+				var res = await _lab6HttpClient.GetData<BookingDetailedDTO>(token, $"booking/{id}");
 
 				return View("Booking", res);
 			}
@@ -60,7 +60,7 @@ namespace Lab_5.Controllers
 
             try
             {
-                var res = await _lab6HttpClient.GetData<List<ModelResponse>>(token, "models");
+                var res = await _lab6HttpClient.GetData<List<ModelDTO>>(token, "models");
 
                 return View("Models", res);
             }
@@ -76,7 +76,7 @@ namespace Lab_5.Controllers
 
 			try
 			{
-				var res = await _lab6HttpClient.GetData<ModelResponseDetailed>(token, "model", code.ToString());
+				var res = await _lab6HttpClient.GetData<ModelDetailedDTO>(token, $"model/{code}");
 
                 return View("Model", res);
 			}
@@ -93,7 +93,7 @@ namespace Lab_5.Controllers
 
 			try
 			{
-				var res = await _lab6HttpClient.GetData<List<BookingStatusResponse>>(token, "booking-statuses");
+				var res = await _lab6HttpClient.GetData<List<BookingStatusDTO>>(token, "booking-statuses");
 
                 return View("BookingStatuses", res);
 			}
@@ -109,7 +109,7 @@ namespace Lab_5.Controllers
 
 			try
 			{
-				var res = await _lab6HttpClient.GetData<BookingStatusResponseDetailed>(token, "booking-status", code.ToString());
+				var res = await _lab6HttpClient.GetData<BookingStatusDetailedDTO>(token, $"booking-status/{code}");
 
                 return View("BookingStatus", res);
 			}

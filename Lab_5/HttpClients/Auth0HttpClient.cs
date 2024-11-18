@@ -7,13 +7,11 @@ namespace Lab_5.HttpClients
 	public class Auth0HttpClient
     {
         private readonly HttpClient _httpClient;
-
         private readonly AuthConfig _authConfig;
 
         public Auth0HttpClient(HttpClient httpClient, IOptions<AuthConfig> options)
         {
             _httpClient = httpClient;
-
 			_authConfig = options.Value;
         }
 

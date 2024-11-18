@@ -1,6 +1,6 @@
-﻿namespace Lab_5.ResponseModels
+﻿namespace Lab_6.DTO
 {
-	public class BookingResponse
+	public class BookingDTO
 	{
 		public int Id { get; set; }
 		public DateTime DateFrom { get; set; }

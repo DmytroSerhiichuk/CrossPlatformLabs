@@ -1,6 +1,6 @@
-﻿namespace Lab_5.ResponseModels
+﻿namespace Lab_5.DTO
 {
-	public class ModelResponse
+	public class ModelDTO
 	{
 		public string Code { get; set; }
 		public decimal DailyHireRate { get; set; }

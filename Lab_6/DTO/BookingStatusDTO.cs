@@ -1,6 +1,6 @@
-﻿namespace Lab_5.ResponseModels
+﻿namespace Lab_6.DTO
 {
-	public class BookingStatusResponse
+	public class BookingStatusDTO
 	{
 		public string Code { get; set; }
 		public string Description { get; set; }
