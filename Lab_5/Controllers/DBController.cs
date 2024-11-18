@@ -1,4 +1,5 @@
 ﻿using Lab_5.HttpClients;
+using Lab_5.ResponseModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -25,7 +26,7 @@ namespace Lab_5.Controllers
 
 			try
 			{
-				var res = await _lab6HttpClient.GetBookings(token);
+				var res = await _lab6HttpClient.GetData<List<BookingResponse>>(token, "bookings");
 
 				return View("Bookings", res);
 			}
@@ -42,7 +43,7 @@ namespace Lab_5.Controllers
 
 			try
 			{
-				var res = await _lab6HttpClient.GetBooking(token, id);
+				var res = await _lab6HttpClient.GetData<BookingResponseDetailed>(token, "booking", $"{id}");
 
 				return View("Booking", res);
 			}
@@ -59,7 +60,7 @@ namespace Lab_5.Controllers
 
             try
             {
-                var res = await _lab6HttpClient.GetModels(token);
+                var res = await _lab6HttpClient.GetData<List<ModelResponse>>(token, "models");
 
                 return View("Models", res);
             }
@@ -75,9 +76,9 @@ namespace Lab_5.Controllers
 
 			try
 			{
-				var res = await _lab6HttpClient.GetModel(token, code);
+				var res = await _lab6HttpClient.GetData<ModelResponseDetailed>(token, "model", code.ToString());
 
-				return View("Model", res);
+                return View("Model", res);
 			}
 			catch
 			{
@@ -92,9 +93,9 @@ namespace Lab_5.Controllers
 
 			try
 			{
-				var res = await _lab6HttpClient.GetBookingStatuses(token);
+				var res = await _lab6HttpClient.GetData<List<BookingStatusResponse>>(token, "booking-statuses");
 
-				return View("BookingStatuses", res);
+                return View("BookingStatuses", res);
 			}
 			catch
 			{
@@ -108,9 +109,9 @@ namespace Lab_5.Controllers
 
 			try
 			{
-				var res = await _lab6HttpClient.GetBookingStatus(token, code);
+				var res = await _lab6HttpClient.GetData<BookingStatusResponseDetailed>(token, "booking-status", code.ToString());
 
-				return View("BookingStatus", res);
+                return View("BookingStatus", res);
 			}
 			catch
 			{
