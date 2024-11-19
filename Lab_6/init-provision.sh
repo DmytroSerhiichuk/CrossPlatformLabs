@@ -16,14 +16,19 @@ sudo add-apt-repository "$(wget -qO- https://packages.microsoft.com/config/ubunt
 sudo apt-get update -y
 sudo apt-get install -y mssql-server
 
-sudo MSSQL_SA_PASSWORD='YourStrongPassword123!' MSSQL_PID=Express /opt/mssql/bin/mssql-conf -n setup accept-eula
+sudo /opt/mssql/bin/mssql-conf setup accept-eula
+
+sudo apt-get install -y mssql-tools unixodbc-dev
+
+echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
+source ~/.bashrc
+
+sudo /opt/mssql/bin/mssql-conf setup
+sudo ACCEPT_EULA=Y /opt/mssql/bin/mssql-conf setup --accept-eula --sa-password "qwerty" --sql-server-version "2019"
 
 sudo systemctl enable mssql-server
 sudo systemctl start mssql-server
 
-sudo apt-get install -y mssql-tools unixodbc-dev
-echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
-source ~/.bashrc
 echo "SQL Server Installed."
 
 # SQLite
