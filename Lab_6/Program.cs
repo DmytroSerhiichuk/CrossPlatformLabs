@@ -10,10 +10,27 @@ builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("Auth0"
 var appSettings = builder.Configuration.GetSection("Auth0").Get<AppSettings>();
 
 // Entity
-// TODO: Add other database types
+var dbProvider = args.FirstOrDefault(arg => arg.StartsWith("--DbType="))?.Split('=')[1] ?? "InMemory";
+Console.WriteLine($"\n\n\nARGUMENTS:{String.Join(' ',args)}\n\n\n");
+var connectionString = builder.Configuration.GetConnectionString(dbProvider);
+
 builder.Services.AddDbContext<BookingDbContext>(options =>
 {
-	options.UseNpgsql(@$"Host=localhost;Username=postgres;Password=qwerty;Database=Lab_6");	
+	switch (dbProvider)
+	{
+	case "PostgreSQL":
+			options.UseNpgsql(connectionString);
+			break;
+		case "SQLServer":
+			options.UseSqlServer(connectionString);
+			break;
+		case "SQLite":
+			options.UseSqlite("Data Source=Lab_6.db");
+			break;
+		default:
+			options.UseInMemoryDatabase("Lab_6");
+			break;
+	}
 });
 
 // Add services to the container.
@@ -52,6 +69,15 @@ app.UseCookiePolicy();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+
+if (dbProvider == "PostgreSQL" || dbProvider == "SQLServer" || dbProvider == "SQLite")
+{
+	using (var scope = app.Services.CreateScope())
+	{
+		var dbContext = scope.ServiceProvider.GetRequiredService<BookingDbContext>();
+		dbContext.Database.Migrate();
+	}
+}
 
 app.MapControllerRoute(
 	name: "default",
