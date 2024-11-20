@@ -28,7 +28,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LabLib", "LabLib\LabLib.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lab_6", "Lab_6\Lab_6.csproj", "{2C492318-0DED-42A8-AEB4-3B90AC74A0A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab_13_Server", "Lab_13\Lab_13_Server\Lab_13_Server.csproj", "{02ABAE59-80D8-4A66-9859-0641D6A84000}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lab_13_Server", "Lab_13\Lab_13_Server\Lab_13_Server.csproj", "{02ABAE59-80D8-4A66-9859-0641D6A84000}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
