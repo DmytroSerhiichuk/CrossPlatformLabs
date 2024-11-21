@@ -78,5 +78,30 @@ namespace Lab_6.Controllers
 
 			return Ok(customers);
 		}
+
+		[HttpPost]
+		public async Task<IActionResult> Create([FromBody] Customer customer)
+		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
+			try
+			{
+				_dbContext.Customers.Add(customer);
+				await _dbContext.SaveChangesAsync();
+
+				return Ok();
+			}
+			catch (Exception ex)
+			{
+				return Problem
+				(
+					detail: ex.Message,
+					statusCode: 500
+				);
+			}
+		}
 	}
 }

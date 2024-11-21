@@ -1,0 +1,75 @@
+﻿@model Lab_5.RequestDTO.CustomerRequestDTO
+
+@{
+	ViewData["Title"] = "Customer - Create";
+	var alertMessage = ViewData["alertMessage"] as string;
+}
+
+@if (!string.IsNullOrEmpty(alertMessage))
+{
+	<script type="text/javascript">
+		alert('@alertMessage');
+	</script>
+}
+
+<div class="text-center">
+	<h1 class="display-4 pb-3">Customer - Create</h1>
+	<form asp-action="Create" method="post" class="text-start">
+		<div class="form-group mb-3">
+			<label asp-for="Id" class="form-label"></label>
+			<input asp-for="Id" class="form-control" />
+		</div>
+		<div class="form-group mb-3">
+			<label asp-for="Name" class="form-label"></label>
+			<input asp-for="Name" class="form-control" />
+		</div>
+		<div class="form-group mb-3">
+			<label asp-for="Details" class="form-label"></label>
+			<input asp-for="Details" class="form-control" />
+		</div>
+		<div class="form-group mb-3">
+			<label asp-for="Gender" class="form-label"></label>
+			<input asp-for="Gender" class="form-control" />
+		</div>
+		<div class="form-group mb-3">
+			<label asp-for="Email" class="form-label"></label>
+			<input asp-for="Email" class="form-control" />
+		</div>
+		<div class="form-group mb-3">
+			<label asp-for="Phone" class="form-label"></label>
+			<input asp-for="Phone" class="form-control" />
+		</div>
+		<div class="form-group mb-3">
+			<label asp-for="AddressLine1" class="form-label"></label>
+			<input asp-for="AddressLine1" class="form-control" />
+		</div>
+		<div class="form-group mb-3">
+			<label asp-for="AddressLine2" class="form-label"></label>
+			<input asp-for="AddressLine2" class="form-control" />
+		</div>
+		<div class="form-group mb-3">
+			<label asp-for="AddressLine3" class="form-label"></label>
+			<input asp-for="AddressLine3" class="form-control" />
+		</div>
+		<div class="form-group mb-3">
+			<label asp-for="Town" class="form-label"></label>
+			<input asp-for="Town" class="form-control" />
+		</div>
+		<div class="form-group mb-3">
+			<label asp-for="County" class="form-label"></label>
+			<input asp-for="County" class="form-control" />
+		</div>
+		<div class="form-group mb-3">
+			<label asp-for="Country" class="form-label"></label>
+			<input asp-for="Country" class="form-control" />
+		</div>
+		<button type="submit" class="btn btn-primary">Create</button>
+		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+	</form>
+</div>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

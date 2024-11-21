@@ -22,13 +22,13 @@ namespace Lab_6.Models
 
 		[Column(TypeName = "char(3)")]
 		public string BookingStatusCode { get; set; }
-		public BookingStatus BookingStatus { get; set; }
+		public BookingStatus? BookingStatus { get; set; }
 
 		[Column(TypeName = "char(10)")]
 		public string VehicleRegNumber { get; set; }
-		public Vehicle Vehicle { get; set; }
+		public Vehicle? Vehicle { get; set; }
 
 		public int CustomerId { get; set; }
-		public Customer Customer { get; set; }
+		public Customer? Customer { get; set; }
 	}
 }

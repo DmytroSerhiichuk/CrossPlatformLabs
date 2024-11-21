@@ -1,0 +1,59 @@
+﻿@model Lab_5.RequestDTO.BookingRequestDTO
+
+@{
+	ViewData["Title"] = "Booking - Create";
+	var alertMessage = ViewData["alertMessage"] as string;
+}
+
+@if (!string.IsNullOrEmpty(alertMessage))
+{
+	<script type="text/javascript">
+		alert('@alertMessage');
+	</script>
+}
+
+<div class="text-center">
+	<h1 class="display-4 pb-3">Booking - Create</h1>
+	<form asp-action="Create" method="post" class="text-start">
+		<div class="form-group mb-3">
+			<label asp-for="Id" class="form-label"></label>
+			<input asp-for="Id" class="form-control" />
+		</div>
+		<div class="form-group mb-3">
+			<label asp-for="DateFrom" class="form-label"></label>
+			<input asp-for="DateFrom" class="form-control" />
+		</div>
+		<div class="form-group mb-3">
+			<label asp-for="DateTo" class="form-label"></label>
+			<input asp-for="DateTo" class="form-control" />
+		</div>
+		<div class="form-group mb-3">
+			<label asp-for="IsConfirmationLetterSent" class="form-label"></label>
+			<input asp-for="IsConfirmationLetterSent" class="form-control" />
+		</div>
+		<div class="form-group mb-3">
+			<label asp-for="IsPaymentReceived" class="form-label"></label>
+			<input asp-for="IsPaymentReceived" class="form-control" />
+		</div>
+		<div class="form-group mb-3">
+			<label asp-for="BookingStatusCode" class="form-label"></label>
+			<input asp-for="BookingStatusCode" class="form-control" />
+		</div>
+		<div class="form-group mb-3">
+			<label asp-for="VehicleRegNumber" class="form-label"></label>
+			<input asp-for="VehicleRegNumber" class="form-control" />
+		</div>
+		<div class="form-group mb-3">
+			<label asp-for="CustomerId" class="form-label"></label>
+			<input asp-for="CustomerId" class="form-control" />
+		</div>
+		<button type="submit" class="btn btn-primary">Create</button>
+		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+	</form>
+</div>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

@@ -57,5 +57,30 @@ namespace Lab_6.Controllers
 
 			return Ok(models);
 		}
+
+		[HttpPost]
+		public async Task<IActionResult> Create([FromBody] BookingStatus bookingStatus)
+		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
+			try
+			{
+				_dbContext.BookingStatuses.Add(bookingStatus);
+				await _dbContext.SaveChangesAsync();
+
+				return Ok();
+			}
+			catch (Exception ex)
+			{
+				return Problem
+				(
+					detail: ex.Message,
+					statusCode: 500
+				);
+			}
+		}
 	}
 }

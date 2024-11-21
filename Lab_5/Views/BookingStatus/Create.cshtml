@@ -1,0 +1,37 @@
+﻿@model Lab_5.RequestDTO.BookingStatusRequestDTO
+
+@{
+	ViewData["Title"] = "BookingStatus - Create";
+	var alertMessage = ViewData["alertMessage"] as string;
+}
+
+@if (!string.IsNullOrEmpty(alertMessage))
+{
+	<script type="text/javascript">
+		alert('@alertMessage');
+	</script>
+}
+
+<div class="text-center">
+	<h1 class="display-4 pb-3">BookingStatus - Create</h1>
+	<form asp-action="Create" method="post" class="text-start">
+		<div class="form-group mb-3">
+			<label asp-for="Code" class="form-label"></label>
+			<input asp-for="Code" class="form-control" />
+			<span asp-validation-for="Code" class="text-danger"></span>
+		</div>
+		<div class="form-group mb-3">
+			<label asp-for="Description" class="form-label"></label>
+			<input asp-for="Description" class="form-control" />
+			<span asp-validation-for="Description" class="text-danger"></span>
+		</div>
+		<button type="submit" class="btn btn-primary">Create</button>
+		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+	</form>
+</div>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

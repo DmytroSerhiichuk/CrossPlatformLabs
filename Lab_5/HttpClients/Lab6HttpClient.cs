@@ -1,4 +1,6 @@
-﻿namespace Lab_5.HttpClients
+﻿using System.Text.Json;
+
+namespace Lab_5.HttpClients
 {
 	public class Lab6HttpClient
 	{
@@ -16,15 +18,29 @@
 
 		public async Task<T> GetData<T>(string token, string url)
 		{
-            var requestUrl = $"{_lab6Url}/api/{url}";
-            var request = new HttpRequestMessage(HttpMethod.Get, requestUrl);
+			var requestUrl = $"{_lab6Url}/api/{url}";
+			var request = new HttpRequestMessage(HttpMethod.Get, requestUrl);
 
-            request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+			request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
-            var response = await _httpClient.SendAsync(request);
-            response.EnsureSuccessStatusCode();
+			var response = await _httpClient.SendAsync(request);
+			response.EnsureSuccessStatusCode();
 
-            return await response.Content.ReadFromJsonAsync<T>();
-        }		
+			return await response.Content.ReadFromJsonAsync<T>();
+		}
+		
+		public async Task PostData<T>(string token, string url, T data)
+		{
+			var requestUrl = $"{_lab6Url}/api/{url}";
+			var request = new HttpRequestMessage(HttpMethod.Post, requestUrl);
+
+			request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+			request.Content = JsonContent.Create(data);
+
+			var response = await _httpClient.SendAsync(request);
+
+			response.EnsureSuccessStatusCode();
+		}
 	}
 }

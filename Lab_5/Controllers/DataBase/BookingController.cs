@@ -1,5 +1,6 @@
 ﻿using Lab_5.DTO;
 using Lab_5.HttpClients;
+using Lab_5.RequestDTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -49,6 +50,47 @@ namespace Lab_5.Controllers.DataBase
 			catch
 			{
 				return RedirectToAction("Login", "Account");
+			}
+		}
+
+		[HttpGet("Create")]
+		public IActionResult Create()
+		{
+			return View("Create");
+		}
+		[HttpPost("Create")]
+		public async Task<IActionResult> Create(BookingRequestDTO bookingStatus)
+		{
+			if (!ModelState.IsValid)
+			{
+				return View("Create", bookingStatus);
+			}
+
+			var token = Request.Cookies[_authConfig.CookieName] ?? "";
+
+			try
+			{
+				await _lab6HttpClient.PostData(token, "booking", bookingStatus);
+
+				ViewData["alertMessage"] = "Success";
+				return View("Create");
+			}
+			catch (HttpRequestException ex)
+			{
+				if (ex.StatusCode == System.Net.HttpStatusCode.Forbidden || ex.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+				{
+					return RedirectToAction("Login", "Account");
+				}
+				else
+				{
+					ModelState.AddModelError(String.Empty, ex.Message);
+					return View("Create", bookingStatus);
+				}
+			}
+			catch (Exception ex)
+			{
+				ModelState.AddModelError(String.Empty, ex.Message);
+				return View("Create", bookingStatus);
 			}
 		}
 	}

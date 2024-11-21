@@ -76,6 +76,7 @@ if (dbProvider == "PostgreSQL" || dbProvider == "SQLServer" || dbProvider == "SQ
 	{
 		var dbContext = scope.ServiceProvider.GetRequiredService<BookingDbContext>();
 		dbContext.Database.Migrate();
+		dbContext.SaveChanges();
 	}
 }
 

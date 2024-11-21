@@ -8,15 +8,14 @@ namespace Lab_6.Models
 		[Key]
         public int Id{ get; set; }
 
-
-        public ICollection<Booking> Bookings { get; set; }
+        public ICollection<Booking>? Bookings { get; set; }
 
 
         [Column(TypeName = "varchar(255)")]
 		public string Name { get; set; }
 
 		[Column(TypeName = "varchar(2000)")]
-		public string Details { get; set; }
+		public string? Details { get; set; }
 
 		[Column(TypeName = "char(1)")]
 		public string Gender{ get; set; }
@@ -31,10 +30,10 @@ namespace Lab_6.Models
 		public string AddressLine1 { get; set; }
 
 		[Column(TypeName = "varchar(255)")]
-		public string AddressLine2 { get; set; }
+		public string? AddressLine2 { get; set; }
 
 		[Column(TypeName = "varchar(255)")]
-		public string AddressLine3 { get; set; }
+		public string? AddressLine3 { get; set; }
 
 		[Column(TypeName = "varchar(50)")]
 		public string Town { get; set; }

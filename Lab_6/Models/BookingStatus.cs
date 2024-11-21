@@ -12,6 +12,6 @@ namespace Lab_6.Models
 		[Column(TypeName = "char(10)")]
 		public string Description { get; set; }
 
-		public ICollection<Booking> Bookings { get; set; }
+		public ICollection<Booking>? Bookings { get; set; }
 	}
 }
