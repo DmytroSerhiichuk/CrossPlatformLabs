@@ -1,9 +1,11 @@
 using Lab_6;
 using Lab_6.Models;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,22 +40,32 @@ builder.Services.AddDbContext<BookingDbContext>(options =>
 builder.Services.AddControllersWithViews();
 
 // Authentication
-builder.Services
-	.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-	.AddJwtBearer(options =>
-	{
-		options.Authority = $"https://{appSettings.Domain}";
-		options.Audience = appSettings.Audience;
+var skipAuth = args.FirstOrDefault(arg => arg.StartsWith("--SkipAuth="))?.Split('=')[1] ?? "false";
 
-		options.TokenValidationParameters = new TokenValidationParameters
-		{
-			ValidateIssuer = true,
-			ValidateAudience = true,
-			ValidateLifetime = true,
-			ValidateIssuerSigningKey = true,
-			ClockSkew = TimeSpan.Zero
-		};
-	});
+if (skipAuth == "false")
+{
+    builder.Services
+    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.Authority = $"https://{appSettings.Domain}";
+        options.Audience = appSettings.Audience;
+
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ClockSkew = TimeSpan.Zero
+        };
+    });
+}
+else
+{
+    builder.Services.AddAuthentication("FakeAuth")
+        .AddScheme<AuthenticationSchemeOptions, FakeAuthenticationHandler>("FakeAuth", options => { });
+}
 
 builder.Services.AddAuthorization();
 
@@ -77,9 +89,11 @@ app.UseStaticFiles();
 app.UseCookiePolicy();
 
 app.UseRouting();
+
 app.UseAuthentication();
 app.UseAuthorization();
 
+// Migration
 if (dbProvider == "PostgreSQL" || dbProvider == "SQLServer" || dbProvider == "SQLite")
 {
 	using (var scope = app.Services.CreateScope())
