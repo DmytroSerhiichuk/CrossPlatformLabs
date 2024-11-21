@@ -26,22 +26,20 @@ vagrant up --provision-with=init
   ```
 Якщо ви вимкнули ВМ, то замість vagrant provision вводити vagrant up
 
-Після цього буде запущено два проекти: Lab_5 та Lab_6, за портами: 5000 та 50001 відповідно
+Після цього буде запущено два проекти: Lab_5 та Lab_6, за портами: 3000 та 3001 відповідно
 
 ---
 
 Якщо ви хочете запустити проекти вручну, то в Lab_6 потрібно передавати аргумент у такому виді:
 * PostgreSQL:
   ```bash
-  dotent run --project Lab_6.csproj -- --DbType=PostgreSQL
+  dotnet run --project Lab_6.csproj -- --DbType=PostgreSQL
   ```
 * SQLServer:
   ```bash
-  dotent run --project Lab_6.csproj -- --DbType=SQLServer
+  dotnet run --project Lab_6.csproj -- --DbType=SQLServer
   ```
 * SQLite:
   ```bash
-  dotent run --project Lab_6.csproj -- --DbType=SQLite
+  dotnet run --project Lab_6.csproj -- --DbType=SQLite
   ```
-
-У такому випадку порти будуть змінені на 3000 та 3001 відповідно

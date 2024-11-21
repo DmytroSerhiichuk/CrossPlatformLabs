@@ -24,7 +24,7 @@ echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
 source ~/.bashrc
 
 sudo /opt/mssql/bin/mssql-conf setup
-sudo ACCEPT_EULA=Y /opt/mssql/bin/mssql-conf setup --accept-eula --sa-password "qwerty" --sql-server-version "2019"
+sudo ACCEPT_EULA=Y /opt/mssql/bin/mssql-conf setup --accept-eula --sa-password "QAZwsxedc_1234" --sql-server-version "2019"
 
 sudo systemctl enable mssql-server
 sudo systemctl start mssql-server
