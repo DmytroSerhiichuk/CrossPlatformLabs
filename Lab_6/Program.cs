@@ -1,6 +1,7 @@
 using Lab_6;
 using Lab_6.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
@@ -36,6 +37,7 @@ builder.Services.AddDbContext<BookingDbContext>(options =>
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// Authentication
 builder.Services
 	.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 	.AddJwtBearer(options =>
@@ -54,6 +56,14 @@ builder.Services
 	});
 
 builder.Services.AddAuthorization();
+
+// Api
+builder.Services.AddApiVersioning(options =>
+{
+	options.ReportApiVersions = true;
+	options.AssumeDefaultVersionWhenUnspecified = true;
+	options.DefaultApiVersion = new ApiVersion(1, 0);
+});
 
 var app = builder.Build();
 

@@ -9,7 +9,10 @@ namespace Lab_6.Controllers
 {
 	[Authorize]
 	[ApiController]
-	[Route("api/booking")]
+    [Route("api/booking")]
+    [Route("api/v{version:apiVersion}/booking")]
+	[ApiVersion("1.0")]
+	[ApiVersion("2.0")]
 	public class BookingController : Controller
 	{
 		private readonly BookingDbContext _dbContext;
@@ -20,6 +23,7 @@ namespace Lab_6.Controllers
 		}
 
 		[HttpGet]
+		[MapToApiVersion("1.0")]
 		public IActionResult GetBookings()
 		{
 			var request = _dbContext.Bookings
@@ -39,7 +43,41 @@ namespace Lab_6.Controllers
 		}
 
 		[HttpGet("{id}")]
-		public IActionResult GetBooking(int id)
+		[MapToApiVersion("1.0")]
+		public IActionResult GetBookingV1(int id)
+		{
+			var booking = _dbContext.Bookings
+				.Include(b => b.BookingStatus)
+				.Include(b => b.Vehicle)
+				.Include(b => b.Customer)
+				.Select(b => new BookingDetailedDTO
+				{
+					Id = b.Id,
+					DateFrom = TimeConverter.ConvertTime(b.DateFrom),
+					DateTo = TimeConverter.ConvertTime(b.DateTo),
+					IsConfirmationLetterSent = b.IsConfirmationLetterSent,
+					IsPaymentReceived = b.IsPaymentReceived,
+					BookingStatus = new BookingStatusDTO
+					{
+						Code = b.BookingStatus.Code,
+					},
+					Vehicle = new VehicleDTO
+					{
+						RegNumber = b.Vehicle.RegNumber,
+					},
+					Customer = new CustomerDTO
+					{
+						Id = b.Customer.Id,
+					}
+				})
+				.FirstOrDefault(b => b.Id == id);
+
+			return Ok(booking);
+		}
+
+		[HttpGet("{id}")]
+		[MapToApiVersion("2.0")]
+		public IActionResult GetBookingV2(int id)
 		{
 			var booking = _dbContext.Bookings
 				.Include(b => b.BookingStatus)
@@ -92,6 +130,7 @@ namespace Lab_6.Controllers
 		}
 
 		[HttpPost]
+		[MapToApiVersion("1.0")]
 		public async Task<IActionResult> Create([FromBody] Booking booking)
 		{
 			if (!ModelState.IsValid)

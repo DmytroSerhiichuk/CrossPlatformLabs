@@ -36,24 +36,40 @@ namespace Lab_5.Controllers.DataBase
 				return RedirectToAction("Login", "Account");
 			}
 		}
-		[HttpGet("{id}")]
-		public async Task<IActionResult> GetBooking(int id)
+		[HttpGet("v1.0/{id}")]
+		public async Task<IActionResult> GetBookingV1(int id)
 		{
 			var token = Request.Cookies[_authConfig.CookieName] ?? "";
 
 			try
 			{
-				var res = await _lab6HttpClient.GetData<BookingDetailedDTO>(token, $"booking/{id}");
+				var res = await _lab6HttpClient.GetData<BookingDetailedDTO>(token, $"v1.0/booking/{id}");
 
-				return View("Booking", res);
+				return View("BookingV1", res);
 			}
 			catch
 			{
 				return RedirectToAction("Login", "Account");
 			}
 		}
+        [HttpGet("v2.0/{id}")]
+        public async Task<IActionResult> GetBookingV2(int id)
+        {
+            var token = Request.Cookies[_authConfig.CookieName] ?? "";
 
-		[HttpGet("Create")]
+            try
+            {
+                var res = await _lab6HttpClient.GetData<BookingDetailedDTO>(token, $"v2.0/booking/{id}");
+
+                return View("BookingV2", res);
+            }
+            catch
+            {
+                return RedirectToAction("Login", "Account");
+            }
+        }
+
+        [HttpGet("Create")]
 		public IActionResult Create()
 		{
 			return View("Create");

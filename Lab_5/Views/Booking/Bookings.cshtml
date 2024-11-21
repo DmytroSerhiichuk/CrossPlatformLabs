@@ -23,14 +23,14 @@
 		@foreach (var booking in Model)
 		{
 			<tr>
-				<td><a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="GetBooking" asp-route-id="@booking.Id">@booking.Id</a></td>
-				<td><a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="GetBooking" asp-route-id="@booking.Id">@booking.DateFrom.ToString("dd/MM/yyyy")</a></td>
-				<td><a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="GetBooking" asp-route-id="@booking.Id">@booking.DateTo.ToString("dd/MM/yyyy")</a></td>
-				<td><a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="GetBooking" asp-route-id="@booking.Id">@booking.IsConfirmationLetterSent</a></td>
-				<td><a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="GetBooking" asp-route-id="@booking.Id">@booking.IsPaymentReceived</a></td>
-				<td><a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="GetBooking" asp-route-id="@booking.Id">@booking.BookingStatusCode</a></td>
-				<td><a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="GetBooking" asp-route-id="@booking.Id">@booking.VehicleRegNumber</a></td>
-				<td><a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="GetBooking" asp-route-id="@booking.Id">@booking.CustomerId</a></td>
+				<td><a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="GetBookingV2" asp-route-id="@booking.Id">@booking.Id</a></td>
+				<td><a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="GetBookingV2" asp-route-id="@booking.Id">@booking.DateFrom.ToString("dd/MM/yyyy")</a></td>
+				<td><a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="GetBookingV2" asp-route-id="@booking.Id">@booking.DateTo.ToString("dd/MM/yyyy")</a></td>
+				<td><a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="GetBookingV2" asp-route-id="@booking.Id">@booking.IsConfirmationLetterSent</a></td>
+				<td><a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="GetBookingV2" asp-route-id="@booking.Id">@booking.IsPaymentReceived</a></td>
+				<td><a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="GetBookingV2" asp-route-id="@booking.Id">@booking.BookingStatusCode</a></td>
+				<td><a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="GetBookingV2" asp-route-id="@booking.Id">@booking.VehicleRegNumber</a></td>
+				<td><a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="GetBookingV2" asp-route-id="@booking.Id">@booking.CustomerId</a></td>
 			</tr>
 		}
 	</tbody>

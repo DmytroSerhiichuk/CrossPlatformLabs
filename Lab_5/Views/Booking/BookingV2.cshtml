@@ -4,6 +4,10 @@
     ViewData["Title"] = "Booking";
 }
 
+<button type="submit" class="btn btn-primary mb-3">
+    <a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="GetBookingV1" asp-route-id="@Model.Id">Повернутися до старого API</a>
+</button>
+
 <h2>Booking</h2>
 
 @if (Model == null)

@@ -1,0 +1,51 @@
+﻿@model Lab_5.DTO.BookingDetailedDTO
+
+@{
+	ViewData["Title"] = "Booking";
+}
+
+<button type="submit" class="btn btn-primary mb-3">
+	<a class="nav-link text-dark" asp-area="" asp-controller="Booking" asp-action="GetBookingV2" asp-route-id="@Model.Id">Перейти на нове API</a>
+</button>
+
+<h2>Booking</h2>
+
+@if (Model == null)
+{
+	<p>Такого елемента не існує</p>
+}
+else
+{
+	<ul class="list-group">
+		<!-- Booking Information -->
+		<li class="list-group-item"><strong>Id:</strong> @Model.Id</li>
+		<li class="list-group-item"><strong>Date From:</strong> @Model.DateFrom</li>
+		<li class="list-group-item"><strong>Date To:</strong> @Model.DateTo</li>
+		<li class="list-group-item"><strong>Confirmation Letter Sent: @Model.IsConfirmationLetterSent</strong></li>
+		<li class="list-group-item"><strong>Payment Received: @Model.IsPaymentReceived</strong></li>
+
+		<!-- Booking Status Information -->
+		<li class="list-group-item">
+			<strong>Booking Status:</strong>
+			<ul class="list-group ms-3">
+				<li class="list-group-item"><strong>Code:</strong> @Model.BookingStatus.Code</li>
+			</ul>
+		</li>
+
+		<!-- Customer Information -->
+		<li class="list-group-item">
+			<strong>Customer:</strong>
+			<ul class="list-group ms-3">
+				<li class="list-group-item"><strong>Id:</strong> @Model.Customer.Id</li>
+			</ul>
+		</li>
+
+		<!-- Vehicle Information -->
+		<li class="list-group-item">
+			<strong>Vehicle:</strong>
+			<ul class="list-group ms-3">
+				<li class="list-group-item"><strong>RegNumber:</strong> @Model.Vehicle.RegNumber</li>
+			</ul>
+		</li>
+	</ul>
+}
