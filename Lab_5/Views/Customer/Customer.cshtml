@@ -1,0 +1,53 @@
+﻿@model Lab_5.DTO.CustomerDetailedDTO
+
+@{
+    ViewData["Title"] = "Customer";
+}
+
+<h2>Customer</h2>
+
+@if (Model == null)
+{
+    <p>Такого елемента не існує</p>
+}
+else
+{
+    <ul>
+        <li class="list-group-item"><strong>Id:</strong> @Model.Id</li>
+        <li class="list-group-item"><strong>Name:</strong> @Model.Name</li>
+        <li class="list-group-item"><strong>Details:</strong> @Model.Details</li>
+        <li class="list-group-item"><strong>Gender:</strong> @Model.Gender</li>
+        <li class="list-group-item"><strong>Email:</strong> @Model.Email</li>
+        <li class="list-group-item"><strong>Phone:</strong> @Model.Phone</li>
+        <li class="list-group-item"><strong>Address Line 1:</strong> @Model.AddressLine1</li>
+        <li class="list-group-item"><strong>Address Line 2:</strong> @Model.AddressLine2</li>
+        <li class="list-group-item"><strong>Address Line 3:</strong> @Model.AddressLine3</li>
+        <li class="list-group-item"><strong>Town:</strong> @Model.Town</li>
+        <li class="list-group-item"><strong>County:</strong> @Model.County</li>
+        <li class="list-group-item"><strong>Country:</strong> @Model.Country</li>
+        <li class="list-group-item">
+            <h3>Bookings:</h3>
+            <div class="row">
+                @foreach (var booking in Model.Bookings)
+                {
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Id: @booking.Id</h5>
+                                <ul class="list-unstyled">
+                                    <li class="list-group-item"><strong>Date From:</strong> @booking.DateFrom</li>
+                                    <li class="list-group-item"><strong>Date To:</strong> @booking.DateTo</li>
+                                    <li class="list-group-item"><strong>Confirmation Letter Sent: @booking.IsConfirmationLetterSent</strong></li>
+                                    <li class="list-group-item"><strong>Payment Received: @booking.IsPaymentReceived</strong></li>
+                                    <li class="list-group-item"><strong>Booking Status: @booking.BookingStatusCode</strong></li>
+                                    <li class="list-group-item"><strong>Vehicle Reg Number: @booking.VehicleRegNumber</strong></li>
+                                    <li class="list-group-item"><strong>Customer Id: @booking.CustomerId</strong></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </li>
+    </ul>
+}
