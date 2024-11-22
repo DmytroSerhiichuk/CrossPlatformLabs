@@ -21,4 +21,5 @@ Vagrant.configure("2") do |config|
     config.vm.provision "postgre", type: "shell", path: "./postgre-provision.sh"
     config.vm.provision "sqlserver", type: "shell", path: "./sqlserver-provision.sh"
     config.vm.provision "sqlite", type: "shell", path: "./sqlite-provision.sh"
+    config.vm.provision "inmemory", type: "shell", path: "./inmemory-provision.sh"
 end

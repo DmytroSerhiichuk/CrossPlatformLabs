@@ -143,7 +143,7 @@ namespace Lab_6.Controllers
 				_dbContext.Bookings.Add(booking);
 				await _dbContext.SaveChangesAsync();
 
-				return Ok();
+                return Created($"api/booking/{booking.Id}", booking);
 			}
 			catch (Exception ex)
 			{

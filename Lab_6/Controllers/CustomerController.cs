@@ -92,7 +92,7 @@ namespace Lab_6.Controllers
 				_dbContext.Customers.Add(customer);
 				await _dbContext.SaveChangesAsync();
 
-				return Ok();
+                return Created($"api/customer/{customer.Id}", customer);                
 			}
 			catch (Exception ex)
 			{

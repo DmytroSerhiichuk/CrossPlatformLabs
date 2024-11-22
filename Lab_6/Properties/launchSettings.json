@@ -2,7 +2,7 @@
   "profiles": {
     "Lab_6": {
       "commandName": "Project",
-      "commandLineArgs": "--DbType=SQLite --SkipAuth=true",
+      "commandLineArgs": "--DbType=SQLite",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

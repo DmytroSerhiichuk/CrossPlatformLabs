@@ -69,9 +69,9 @@ namespace Lab_6.Controllers
 			try
 			{
 				_dbContext.BookingStatuses.Add(bookingStatus);
-				await _dbContext.SaveChangesAsync();
+                await _dbContext.SaveChangesAsync();
 
-				return Ok();
+				return Created($"api/booking-status/{bookingStatus.Code}", bookingStatus);
 			}
 			catch (Exception ex)
 			{

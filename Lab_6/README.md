@@ -24,6 +24,10 @@ vagrant up --provision-with=init
   ```bash
   vagrant provision --provision-with=sqlite
   ```
+* InMemory:
+  ```bash
+  vagrant provision --provision-with=inmemory
+  ```
 Якщо ви вимкнули ВМ, то замість vagrant provision вводити vagrant up
 
 Після цього буде запущено два проекти: Lab_5 та Lab_6, за портами: 3000 та 3001 відповідно
@@ -42,4 +46,8 @@ vagrant up --provision-with=init
 * SQLite:
   ```bash
   dotnet run --project Lab_6.csproj -- --DbType=SQLite
+  ```
+* InMemory:
+  ```bash
+  dotnet run --project Lab_6.csproj -- --DbType=InMemory
   ```
