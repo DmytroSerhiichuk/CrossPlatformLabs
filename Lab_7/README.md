@@ -8,7 +8,7 @@
   ```
 * SQLServer:
   ```bash
-  npm test -- --DbType=PostgreSQL
+  npm test -- --DbType=SQLServer
   ```
 * SQLite:
   ```bash
@@ -18,6 +18,36 @@
   ```bash
   npm test -- --DbType=InMemory
   ```
+
+# Для запуску на віртуальній машині необхідно мати: Vagrant та Virtual box
+
+Для створення вм потрібно ввести таку команду:
+
+```bash
+vagrant up --provision-with=init
+```
+
+Після цього буде створено вм з усіма необхідними даними
+
+Для запуску тестів виконанти таку команду:
+* PostgreSQL:
+  ```bash
+  vagrant provision --provision-with=postgre
+  ```
+* SQLServer:
+  ```bash
+  vagrant provision --provision-with=sqlserver
+  ```
+* SQLite:
+  ```bash
+  vagrant provision --provision-with=sqlite
+  ```
+* InMemory:
+  ```bash
+  vagrant provision --provision-with=inmemory
+  ```
+
+Результати тестів будуть у консолі
 
 # Результати:
 

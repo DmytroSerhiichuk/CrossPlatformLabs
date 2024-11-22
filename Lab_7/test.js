@@ -1,9 +1,11 @@
 const request = require('supertest');
 const { spawn } = require('child_process');
+const treeKill = require('tree-kill'); 
 
 const apiurl = 'http://localhost:3001';
 
 const dbType = process.argv.find(arg => arg.startsWith('--DbType='))?.split('=')[1] || 'InMemory';
+const path = process.argv.find(arg => arg.startsWith('--Lab6Path='))?.split('=')[1] || './../Lab_6/Lab_6.csproj';
 
 let dotnetProcess;
 
@@ -13,7 +15,7 @@ beforeAll(async () => {
   dotnetProcess = spawn('dotnet', [
     'run',
     '--project',
-    './../Lab_6/Lab_6.csproj',
+    path,
     `--DbType=${dbType}`,
     '--SkipAuth=true',
   ]);
@@ -49,13 +51,23 @@ beforeAll(async () => {
 afterAll(async () => {
   console.log('Stopping dotnet project...');
   if (dotnetProcess) {
-    dotnetProcess.kill('SIGINT');
-    await new Promise((resolve) => {
-      dotnetProcess.on('close', (code) => {
-        console.log(`Dotnet project exited with code ${code}`);
-        resolve();
+    try {
+      await new Promise((resolve) => {
+        treeKill(dotnetProcess.pid, 'SIGKILL', (err) => {
+          if (err) {
+            console.error('Error killing dotnet process:', err);
+          } else {
+            console.log('Dotnet process killed successfully.');
+          }
+          resolve();
+        });
       });
-    });
+    } catch (error) {
+      console.error('Failed to kill process:', error);
+    }
+
+    dotnetProcess.stdout.destroy();
+    dotnetProcess.stderr.destroy();
   }
 });
 
