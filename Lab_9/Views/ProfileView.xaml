@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Lab_9.Views.ProfileView"
+             xmlns:viewModels="clr-namespace:Lab_9.ViewModels"
+             Title="Profile">
+    <ContentPage.BindingContext>
+        <viewModels:ProfileViewModel />
+    </ContentPage.BindingContext>
+
+    <StackLayout>
+        <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" />
+        <StackLayout IsVisible="{Binding IsLoaded}" Padding="20">
+            <Image Source="{Binding User.Picture}" HeightRequest="150" WidthRequest="150"/>
+            <Label Text="{Binding User.UserName}" />
+            <Label Text="{Binding User.FullName}" />
+            <Label Text="{Binding User.Email}" />
+            <Label Text="{Binding User.Phone}" />
+            <Button Text="Logout" Command="{Binding LogoutCommand}"/>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>
