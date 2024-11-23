@@ -34,7 +34,49 @@ namespace Lab_9.Services
             SecureStorage.Remove(TOKEN_KEY);
         }
 
-        public static async Task<string> AuthenticateUserAsync(LoginModel loginModel)
+        public static async Task<string> GetManagementApiTokenAsync()
+        {
+            var tokenEndpoint = $"https://{_DOMAIN}/oauth/token";
+            var tokenRequest = new
+            {
+                client_id = _CLIENT_ID,
+                client_secret = _CLIENT_SECRET,
+                audience = _AUDIENCE,
+                grant_type = "client_credentials"
+            };
+
+            var response = await _httpClient.PostAsJsonAsync(tokenEndpoint, tokenRequest);
+            response.EnsureSuccessStatusCode();
+
+            var responseContent = await response.Content.ReadFromJsonAsync<JsonElement>();
+            return responseContent.GetProperty("access_token").GetString();
+        }
+
+        public static async Task CreateUserAsync(SignUpModel model)
+        {
+            var token = await GetManagementApiTokenAsync();
+            var requestUrl = $"https://{_DOMAIN}/api/v2/users";
+
+            var request = new HttpRequestMessage(HttpMethod.Post, requestUrl);
+            request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+            request.Content = JsonContent.Create(new
+            {
+                nickname = model.UserName,
+                name = model.FullName,
+                password = model.Password,
+                connection = _CONNECTION,
+                email = model.Email,
+                email_verified = false,
+                phone_number = model.PhoneNumber,
+                phone_verified = false
+            });
+
+            var response = await _httpClient.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+        }
+
+        public static async Task<string> AuthenticateUserAsync(string email, string password)
         {
             var requestUrl = $"https://{_DOMAIN}/oauth/token";
             var request = new HttpRequestMessage(HttpMethod.Post, requestUrl);
@@ -42,8 +84,8 @@ namespace Lab_9.Services
             request.Content = JsonContent.Create(new
             {
                 grant_type = "password",
-                username = loginModel.Email,
-                password = loginModel.Password,
+                username = email,
+                password = password,
                 audience = _AUDIENCE,
                 client_id = _CLIENT_ID,
                 client_secret = _CLIENT_SECRET,

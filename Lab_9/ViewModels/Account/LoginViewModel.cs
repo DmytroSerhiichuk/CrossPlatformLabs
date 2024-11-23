@@ -101,7 +101,7 @@ namespace Lab_9.ViewModels.Account
 
             try
             {
-                var token = await AuthService.AuthenticateUserAsync(_loginModel);
+                var token = await AuthService.AuthenticateUserAsync(_loginModel.Email, _loginModel.Password);
                 
                 if (String.IsNullOrEmpty(token)) throw new Exception();
 
