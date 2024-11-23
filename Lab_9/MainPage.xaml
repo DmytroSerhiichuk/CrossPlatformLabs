@@ -12,6 +12,8 @@
                 Text="Головна сторінка!"
                 Style="{StaticResource Headline}"
                 SemanticProperties.HeadingLevel="Level1" />
+
+            <Label Text="Даний застосунок є тонким клієнт API для севера з Lab 6" />
         </VerticalStackLayout>
     </ScrollView>
 

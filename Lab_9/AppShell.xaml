@@ -32,5 +32,10 @@
         FlyoutItemIsVisible="True"
         ContentTemplate="{DataTemplate account:SignUp}"
         Route="signup" />
+    <ShellContent
+        Title="About"
+        FlyoutItemIsVisible="True"
+        ContentTemplate="{DataTemplate views:AboutView}"
+        Route="about" />
 
 </Shell>
