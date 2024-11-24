@@ -8,20 +8,22 @@
         <viewModels:SignUpViewModel />
     </ContentPage.BindingContext>
 
-    <StackLayout Padding="20" Spacing="15">
-        <Label Text="Sign Up" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" />
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="15">
+            <Label Text="Sign Up" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" />
 
-        <Label Text="Invalid data!" IsVisible="{Binding IsInvalidData}" TextColor="#f00" />
-        
-        <Entry Placeholder="Username" Text="{Binding UserName}" />
-        <Entry Placeholder="Full Name" Text="{Binding FullName}" />
-        <Entry Placeholder="Email" Text="{Binding Email}" Keyboard="Email" />
-        <Entry Placeholder="Phone Number" Text="{Binding PhoneNumber}" Keyboard="Telephone" />
-        <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="True" />
-        <Entry Placeholder="Confirm Password" Text="{Binding PasswordConfirm}" IsPassword="True" />
+            <Label Text="Invalid data!" IsVisible="{Binding IsInvalidData}" TextColor="#f00" />
 
-        <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Margin="0,10" />
+            <Entry Placeholder="Username" Text="{Binding UserName}" />
+            <Entry Placeholder="Full Name" Text="{Binding FullName}" />
+            <Entry Placeholder="Email" Text="{Binding Email}" Keyboard="Email" />
+            <Entry Placeholder="Phone Number" Text="{Binding PhoneNumber}" Keyboard="Telephone" />
+            <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="True" />
+            <Entry Placeholder="Confirm Password" Text="{Binding PasswordConfirm}" IsPassword="True" />
 
-        <Button Text="Sign Up" Command="{Binding SignUpCommand}" IsEnabled="{Binding CanSignUp}" />
-    </StackLayout>
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Margin="0,10" />
+
+            <Button Text="Sign Up" Command="{Binding SignUpCommand}" IsEnabled="{Binding CanSignUp}" />
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

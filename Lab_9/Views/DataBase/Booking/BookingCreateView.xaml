@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Lab_9.Views.DataBase.Booking.BookingCreateView"
+             xmlns:viewModels="clr-namespace:Lab_9.ViewModels.DataBase.Booking"
+             Title="Booking - Create">
+
+    <ContentPage.BindingContext>
+        <viewModels:BookingCreateViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="15">
+            <Label Text="Create" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" />
+
+            <Label Text="Invalid data!" IsVisible="{Binding IsInvalidData}" TextColor="#f00" />
+            
+            <Entry Placeholder="Id" Text="{Binding Id}" Keyboard="Numeric" />
+
+            <Label Text="From Date:" />
+            <DatePicker Date="{Binding DateFrom}" />
+
+            <Label Text="To Date:" />
+            <DatePicker Date="{Binding DateTo}" />
+
+            <Entry Placeholder="Confirmation Letter Sent" Text="{Binding IsConfirmationLetterSent}" />
+            <Entry Placeholder="Payment Received" Text="{Binding IsPaymentReceived}" />
+            <Entry Placeholder="Booking Status Code" Text="{Binding BookingStatusCode}" />
+            <Entry Placeholder="Vehicle Reg Number" Text="{Binding VehicleRegNumber}" />
+            <Entry Placeholder="Customer Id" Text="{Binding CustomerId}" Keyboard="Numeric" />
+
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Margin="0,10" />
+
+            <Button Text="Create" Command="{Binding CreateCommand}" IsEnabled="{Binding CanCreate}" />
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

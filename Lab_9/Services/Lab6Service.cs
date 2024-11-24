@@ -30,5 +30,24 @@ namespace Lab_9.Services
 
             return await response.Content.ReadFromJsonAsync<T>();
         }
+
+        public static async Task PostData<T>(string token, string url, T data)
+        {
+            if (string.IsNullOrEmpty(token))
+            {
+                throw new UnauthorizedAccessException();
+            }
+
+            var requestUrl = $"{_LAB_6_URL}/api/{url}";
+            var request = new HttpRequestMessage(HttpMethod.Post, requestUrl);
+
+            request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+            request.Content = JsonContent.Create(data);
+
+            var response = await _httpClient.SendAsync(request);
+
+            response.EnsureSuccessStatusCode();
+        }
     }
 }

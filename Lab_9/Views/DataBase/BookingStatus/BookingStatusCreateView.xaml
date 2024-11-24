@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Lab_9.Views.DataBase.BookingStatus.BookingStatusCreateView"
+             xmlns:viewModels="clr-namespace:Lab_9.ViewModels.DataBase.BookingStatus"
+             Title="BookingStatus - Create">
+
+    <ContentPage.BindingContext>
+        <viewModels:BookingStatusCreateViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="15">
+            <Label Text="Create" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" />
+
+            <Label Text="Invalid data!" IsVisible="{Binding IsInvalidData}" TextColor="#f00" />
+
+            <Entry Placeholder="Code" Text="{Binding Code}" />
+            <Entry Placeholder="Description" Text="{Binding Description}" />
+
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Margin="0,10" />
+
+            <Button Text="Create" Command="{Binding CreateCommand}" IsEnabled="{Binding CanCreate}" />
+        </StackLayout>
+    </ScrollView>
+    
+</ContentPage>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Lab_9.Views.DataBase.Customer.CustomerCreateView"
+             xmlns:viewModels="clr-namespace:Lab_9.ViewModels.DataBase.Customer"
+             Title="Customer - Create">
+
+    <ContentPage.BindingContext>
+        <viewModels:CustomerCreateViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="15">
+            <Label Text="Create" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" />
+
+            <Label Text="Invalid data!" IsVisible="{Binding IsInvalidData}" TextColor="#f00" />
+
+            <Entry Placeholder="Id" Text="{Binding Id}" Keyboard="Numeric" />
+            <Entry Placeholder="Name" Text="{Binding Name}" />
+            <Entry Placeholder="Details" Text="{Binding Details}" />
+            <Entry Placeholder="Gender" Text="{Binding Gender}" />
+            <Entry Placeholder="Email" Text="{Binding Email}" Keyboard="Email" />
+            <Entry Placeholder="Phone" Text="{Binding Phone}" Keyboard="Telephone" />
+            <Entry Placeholder="AddressLine1" Text="{Binding AddressLine1}" />
+            <Entry Placeholder="AddressLine2" Text="{Binding AddressLine2}" />
+            <Entry Placeholder="AddressLine3" Text="{Binding AddressLine3}" />
+            <Entry Placeholder="Town" Text="{Binding Town}" />
+            <Entry Placeholder="County" Text="{Binding County}" />
+            <Entry Placeholder="Country" Text="{Binding Country}" />
+
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Margin="0,10" />
+
+            <Button Text="Create" Command="{Binding CreateCommand}" IsEnabled="{Binding CanCreate}" />
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

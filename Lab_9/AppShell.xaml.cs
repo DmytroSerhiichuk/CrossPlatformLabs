@@ -12,8 +12,11 @@ namespace Lab_9
             InitializeComponent();
 
             Routing.RegisterRoute("database/bookings", typeof(BookingsView));
+            Routing.RegisterRoute("database/booking/create", typeof(BookingCreateView));
             Routing.RegisterRoute("database/booking-statuses", typeof(BookingStatusesView));
+            Routing.RegisterRoute("database/booking-status/create", typeof(BookingStatusCreateView));
             Routing.RegisterRoute("database/customers", typeof(CustomersView));
+            Routing.RegisterRoute("database/customer/create", typeof(CustomerCreateView));
 
             Routing.RegisterRoute("database/graphic", typeof(GraphicView));
         }
