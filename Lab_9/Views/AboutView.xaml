@@ -9,9 +9,9 @@
         Spacing="25">
 
             <Label
-            Text="About"
-            Style="{StaticResource Headline}"
-            SemanticProperties.HeadingLevel="Level1" />
+                x:Name="TitleLabel"
+                Text="About"
+                Style="{StaticResource Headline}" />
 
             <Label Text="Опис: Даний застосунок зроблено за вимогами лабораторної роботи №9" />
             <Label Text="Автор: Сергійчук Дмитро Віталійович ІПЗ-31" />

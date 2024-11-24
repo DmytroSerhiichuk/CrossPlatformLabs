@@ -14,7 +14,7 @@
         <StackLayout>
             <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Margin="0,10" />
             
-            <chart:ChartView Chart="{Binding ChartData}" HeightRequest="300" />
+            <chart:ChartView x:Name="MainChart" Chart="{Binding ChartData}" HeightRequest="300" />
         </StackLayout>
     </ScrollView>
 </ContentPage>

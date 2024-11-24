@@ -23,10 +23,10 @@ namespace Lab_9
 
         public void UpdateNavigation(bool isLoggedIn)
         {
-            this.FindByName<ShellContent>("ProfileShell").FlyoutItemIsVisible = isLoggedIn;
-            this.FindByName<ShellContent>("SearchShell").FlyoutItemIsVisible = isLoggedIn;
-            this.FindByName<ShellContent>("LoginShell").FlyoutItemIsVisible = !isLoggedIn;
-            this.FindByName<ShellContent>("SignUpShell").FlyoutItemIsVisible = !isLoggedIn;
+            ProfileShell.FlyoutItemIsVisible = isLoggedIn;
+            SearchShell.FlyoutItemIsVisible = isLoggedIn;
+            LoginShell.FlyoutItemIsVisible = !isLoggedIn;
+            SignUpShell.FlyoutItemIsVisible = !isLoggedIn;
         }
     }
 }

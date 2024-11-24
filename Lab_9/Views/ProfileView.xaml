@@ -9,9 +9,9 @@
     </ContentPage.BindingContext>
 
     <ScrollView>
-        <StackLayout Padding="10">
+        <StackLayout Padding="15">
             <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" />
-            <StackLayout IsVisible="{Binding IsLoaded}" Padding="20">
+            <StackLayout IsVisible="{Binding IsLoaded}">
                 <StackLayout Spacing="15">
                     <Image Source="{Binding User.Picture}" HeightRequest="150" WidthRequest="150"/>
                     <Label Text="{Binding User.UserName}" />

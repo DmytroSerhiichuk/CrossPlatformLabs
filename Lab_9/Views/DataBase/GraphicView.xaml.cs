@@ -11,6 +11,11 @@ public partial class GraphicView : ContentPage
 
         ViewModel = new GraphicViewModel();
         BindingContext = ViewModel;
+
+        if (DeviceInfo.Platform == DevicePlatform.Android && DeviceInfo.Idiom == DeviceIdiom.Watch)
+        {
+            MainChart.HeightRequest = 120;
+        }
     }
 
     protected override void OnAppearing()

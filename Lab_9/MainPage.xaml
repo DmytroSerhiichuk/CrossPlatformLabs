@@ -7,11 +7,11 @@
         <VerticalStackLayout
             Padding="30,0"
             Spacing="25">
-
-            <Label
+            
+            <Label x:Name="TitleLabel"
+                IsVisible="{OnPlatform Tizen=False}"
                 Text="Головна сторінка!"
-                Style="{StaticResource Headline}"
-                SemanticProperties.HeadingLevel="Level1" />
+                Style="{StaticResource Headline}" />
 
             <Label Text="Даний застосунок є тонким клієнт API для севера з Lab 6" />
         </VerticalStackLayout>
