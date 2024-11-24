@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Lab_9.Views.DataBase.BookingStatus.BookingStatusesView"
+             xmlns:viewModels="clr-namespace:Lab_9.ViewModels.DataBase.BookingStatus"
+             Title="Booking Statuses - List">
+    
+    <ContentPage.BindingContext>
+        <viewModels:BookingStatusesViewModel />
+    </ContentPage.BindingContext>
+
+
+    <ScrollView>
+        <StackLayout x:Name="MainContainer">
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Margin="0,10" />
+
+            <CollectionView ItemsSource="{Binding BookingStatuses}" IsVisible="{Binding IsLoaded}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BorderColor="Gray" Padding="10" Margin="5">
+                            <StackLayout>
+                                <Label Text="Booking Status Code:" FontAttributes="Bold"/>
+                                <Label Text="{Binding Code}" />
+
+                                <Label Text="Description:" FontAttributes="Bold"/>
+                                <Label Text="{Binding Description}" />
+
+                                <Label Text="Booking Count:" FontAttributes="Bold"/>
+                                <Label Text="{Binding BookingCount}" />
+
+                                <Button Text="More" 
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:BookingStatusesViewModel}}, Path=ShowMoreCommand}"
+                                    CommandParameter="{Binding Code}"/>
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

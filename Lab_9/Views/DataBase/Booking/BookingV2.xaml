@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Lab_9.Views.DataBase.Booking.BookingV2"
+             xmlns:viewModels="clr-namespace:Lab_9.ViewModels.DataBase.Booking"
+             Title="BookingV2">
+
+    <ContentPage.BindingContext>
+        <viewModels:BookingV2ViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView Padding="20">
+        <StackLayout>
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Margin="0,10" />
+
+            <StackLayout IsVisible="{Binding IsLoaded}">
+                <Button Text="Перейти до старої версії API" Command="{Binding ShowOldApiCommand}" Margin="0, 0, 0, 10" />
+
+                <Label Text="Booking ID:" FontAttributes="Bold"/>
+                <Label Text="{Binding Booking.Id}" />
+
+                <Label Text="From:" FontAttributes="Bold"/>
+                <Label Text="{Binding Booking.DateFrom, StringFormat='{0:yyyy-MM-dd HH:mm}'}" />
+
+                <Label Text="To:" FontAttributes="Bold"/>
+                <Label Text="{Binding Booking.DateTo, StringFormat='{0:yyyy-MM-dd HH:mm}'}" />
+
+                <Label Text="Confirmation Letter Sent:" FontAttributes="Bold"/>
+                <Label Text="{Binding Booking.IsConfirmationLetterSent}" />
+
+                <Label Text="Payment Received:" FontAttributes="Bold"/>
+                <Label Text="{Binding Booking.IsPaymentReceived}" />
+
+                <Label Text="Booking Status:" FontAttributes="Bold"/>
+                <Frame BorderColor="Gray" Padding="10" Margin="5">
+                    <StackLayout>
+                        <Label Text="Code:" FontAttributes="Bold"/>
+                        <Label Text="{Binding Booking.BookingStatus.Code}" />
+
+                        <Label Text="Description:" FontAttributes="Bold"/>
+                        <Label Text="{Binding Booking.BookingStatus.Description}" />
+
+                        <Label Text="BookingCount:" FontAttributes="Bold"/>
+                        <Label Text="{Binding Booking.BookingStatus.BookingCount}" />
+                    </StackLayout>
+                </Frame>
+
+                <Label Text="Vehicle:" FontAttributes="Bold"/>
+                <Frame BorderColor="Gray" Padding="10" Margin="5">
+                    <StackLayout>
+                        <Label Text="RegNumber:" FontAttributes="Bold"/>
+                        <Label Text="{Binding Booking.Vehicle.RegNumber}" />
+
+                        <Label Text="Current Mileage:" FontAttributes="Bold"/>
+                        <Label Text="{Binding Booking.Vehicle.CurrentMileage}" />
+
+                        <Label Text="Daily Hire Rate:" FontAttributes="Bold"/>
+                        <Label Text="{Binding Booking.Vehicle.DailyHireRate}" />
+
+                        <Label Text="Date Mot Due:" FontAttributes="Bold"/>
+                        <Label Text="{Binding Booking.Vehicle.DateMotDue, StringFormat='{0:yyyy-MM-dd HH:mm}'}" />
+
+                        <Label Text="Manufacturer:" FontAttributes="Bold"/>
+                        <Label Text="{Binding Booking.Vehicle.ManufacturerCode}" />
+
+                        <Label Text="Model:" FontAttributes="Bold"/>
+                        <Label Text="{Binding Booking.Vehicle.ModelCode}" />
+
+                        <Label Text="Vehicle Category:" FontAttributes="Bold"/>
+                        <Label Text="{Binding Booking.Vehicle.VehicleCategoryCode}" />
+
+                        <Label Text="Booking Count:" FontAttributes="Bold"/>
+                        <Label Text="{Binding Booking.Vehicle.BookingCount}" />
+                    </StackLayout>
+                </Frame>
+
+                <Label Text="Customer:" FontAttributes="Bold"/>
+                <Frame BorderColor="Gray" Padding="10" Margin="5">
+                    <StackLayout>
+                        <Label Text="Id:" FontAttributes="Bold"/>
+                        <Label Text="{Binding Booking.Customer.Id}" />
+
+                        <Label Text="Name:" FontAttributes="Bold"/>
+                        <Label Text="{Binding Booking.Customer.Name}" />
+
+                        <Label Text="Details:" FontAttributes="Bold"/>
+                        <Label Text="{Binding Booking.Customer.Details}" />
+
+                        <Label Text="Gender:" FontAttributes="Bold"/>
+                        <Label Text="{Binding Booking.Customer.Gender}" />
+
+                        <Label Text="Email:" FontAttributes="Bold"/>
+                        <Label Text="{Binding Booking.Customer.Email}" />
+
+                        <Label Text="Phone:" FontAttributes="Bold"/>
+                        <Label Text="{Binding Booking.Customer.Phone}" />
+
+                        <Label Text="Address Line 1:" FontAttributes="Bold"/>
+                        <Label Text="{Binding Booking.Customer.AddressLine1}" />
+
+                        <Label Text="Address Line 2:" FontAttributes="Bold"/>
+                        <Label Text="{Binding Booking.Customer.AddressLine2}" />
+
+                        <Label Text="Address Line 3:" FontAttributes="Bold"/>
+                        <Label Text="{Binding Booking.Customer.AddressLine3}" />
+
+                        <Label Text="Town:" FontAttributes="Bold"/>
+                        <Label Text="{Binding Booking.Customer.Town}" />
+
+                        <Label Text="County:" FontAttributes="Bold"/>
+                        <Label Text="{Binding Booking.Customer.County}" />
+
+                        <Label Text="Country:" FontAttributes="Bold"/>
+                        <Label Text="{Binding Booking.Customer.Country}" />
+
+                        <Label Text="Booking Count:" FontAttributes="Bold"/>
+                        <Label Text="{Binding Booking.Customer.BookingCount}" />
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+            
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

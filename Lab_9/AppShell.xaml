@@ -19,7 +19,7 @@
         Title="Profile"
         FlyoutItemIsVisible="False"
         ContentTemplate="{DataTemplate views:ProfileView}"
-        Route="profile" />
+        Route="profile"/>
     <ShellContent
         x:Name="LoginShell"
         Title="Login"

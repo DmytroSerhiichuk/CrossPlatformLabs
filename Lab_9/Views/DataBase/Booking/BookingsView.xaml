@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Lab_9.Views.DataBase.Booking.BookingsView"
+             xmlns:viewModels="clr-namespace:Lab_9.ViewModels.DataBase.Booking"
+             Title="Bookings - List">
+
+    <ContentPage.BindingContext>
+        <viewModels:BookingsViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <StackLayout x:Name="MainContainer">
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Margin="0,10" />
+
+            <CollectionView ItemsSource="{Binding Bookings}" IsVisible="{Binding IsLoaded}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BorderColor="Gray" Padding="10" Margin="5">
+                            <StackLayout>
+                                <Label Text="Booking ID:" FontAttributes="Bold"/>
+                                <Label Text="{Binding Id}" />
+
+                                <Label Text="From:" FontAttributes="Bold"/>
+                                <Label Text="{Binding DateFrom, StringFormat='{0:yyyy-MM-dd HH:mm}'}" />
+
+                                <Label Text="To:" FontAttributes="Bold"/>
+                                <Label Text="{Binding DateTo, StringFormat='{0:yyyy-MM-dd HH:mm}'}" />
+
+                                <Label Text="Confirmation Letter Sent:" FontAttributes="Bold"/>
+                                <Label Text="{Binding IsConfirmationLetterSent}" />
+
+                                <Label Text="Payment Received:" FontAttributes="Bold"/>
+                                <Label Text="{Binding IsPaymentReceived}" />
+
+                                <Label Text="Booking Status:" FontAttributes="Bold"/>
+                                <Label Text="{Binding BookingStatusCode}" />
+
+                                <Label Text="Vehicle Registration Number:" FontAttributes="Bold"/>
+                                <Label Text="{Binding VehicleRegNumber}" />
+
+                                <Button Text="More" 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:BookingsViewModel}}, Path=ShowMoreCommand}"
+                                        CommandParameter="{Binding Id}"/>
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </StackLayout>
+    </ScrollView>
+    
+</ContentPage>

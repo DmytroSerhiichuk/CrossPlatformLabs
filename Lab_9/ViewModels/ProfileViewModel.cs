@@ -1,16 +1,14 @@
 ﻿using Lab_9.Models;
 using Lab_9.Services;
-using System.ComponentModel;
 using System.Windows.Input;
 
 namespace Lab_9.ViewModels
 {
-    public class ProfileViewModel : INotifyPropertyChanged
+    public class ProfileViewModel : BaseViewModel
     {
         private UserModel _user;
         private bool _isBusy;
         private bool _isLoaded;
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public UserModel User 
         { 
@@ -47,9 +45,15 @@ namespace Lab_9.ViewModels
         }
 
         public ICommand LogoutCommand { get; }
+        public ICommand NavigateToBookingsCommand { get; }
+        public ICommand NavigateToBookingStatusesCommand { get; }
+        public ICommand NavigateToCustomersCommand { get; }
         public ProfileViewModel()
         {
             LogoutCommand = new Command(LogoutAsync);
+            NavigateToBookingsCommand = new Command(NavigateToBookings);
+            NavigateToBookingStatusesCommand = new Command(NavigateToBookingStatuses);
+            NavigateToCustomersCommand = new Command(NavigateToCustomers);
         }
 
         public async Task LoadUserAsync()
@@ -80,10 +84,17 @@ namespace Lab_9.ViewModels
             (App.Current.MainPage as AppShell)?.UpdateNavigation(false);
             await Shell.Current.GoToAsync("//login");
         }
-
-        protected virtual void OnPropertyChanged(string propertyName)
+        public async void NavigateToBookings()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            await Shell.Current.GoToAsync("database/bookings");
+        }
+        public async void NavigateToBookingStatuses()
+        {
+            await Shell.Current.GoToAsync("database/booking-statuses");
+        }
+        public async void NavigateToCustomers()
+        {
+            await Shell.Current.GoToAsync("database/customers");
         }
     }
 }

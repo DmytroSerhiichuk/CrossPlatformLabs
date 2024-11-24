@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Lab_9.Views.DataBase.Customer.CustomersView"
+             xmlns:viewModels="clr-namespace:Lab_9.ViewModels.DataBase.Customer"
+             Title="Customers - List">
+
+    <ContentPage.BindingContext>
+        <viewModels:CustomersViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <StackLayout x:Name="MainContainer">
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Margin="0,10" />
+
+            <CollectionView ItemsSource="{Binding Customers}" IsVisible="{Binding IsLoaded}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BorderColor="Gray" Padding="10" Margin="5">
+                            <StackLayout>
+                                <Label Text="Customer Id:" FontAttributes="Bold"/>
+                                <Label Text="{Binding Id}" />
+
+                                <Label Text="Name:" FontAttributes="Bold"/>
+                                <Label Text="{Binding Name}" />
+
+                                <Label Text="Details:" FontAttributes="Bold"/>
+                                <Label Text="{Binding Details}" />
+
+                                <Label Text="Gender:" FontAttributes="Bold"/>
+                                <Label Text="{Binding Gender}" />
+
+                                <Label Text="Email:" FontAttributes="Bold"/>
+                                <Label Text="{Binding Email}" />
+
+                                <Label Text="Phone:" FontAttributes="Bold"/>
+                                <Label Text="{Binding Phone}" />
+
+                                <Label Text="Address Line 1:" FontAttributes="Bold"/>
+                                <Label Text="{Binding AddressLine1}" />
+
+                                <Label Text="Address Line 2:" FontAttributes="Bold"/>
+                                <Label Text="{Binding AddressLine2}" />
+
+                                <Label Text="Address Line 3:" FontAttributes="Bold"/>
+                                <Label Text="{Binding AddressLine3}" />
+
+                                <Label Text="Town:" FontAttributes="Bold"/>
+                                <Label Text="{Binding Town}" />
+
+                                <Label Text="County:" FontAttributes="Bold"/>
+                                <Label Text="{Binding County}" />
+
+                                <Label Text="Country:" FontAttributes="Bold"/>
+                                <Label Text="{Binding Country}" />
+
+                                <Label Text="Booking Count:" FontAttributes="Bold"/>
+                                <Label Text="{Binding BookingCount}" />
+
+                                <Button Text="More" 
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:CustomersViewModel}}, Path=ShowMoreCommand}"
+                                    CommandParameter="{Binding Id}"/>
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

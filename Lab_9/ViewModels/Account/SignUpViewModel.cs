@@ -1,18 +1,16 @@
 ﻿using Lab_9.Models;
 using Lab_9.Services;
-using System.ComponentModel;
 using System.Windows.Input;
 
 namespace Lab_9.ViewModels.Account
 {
-    public class SignUpViewModel : INotifyPropertyChanged
+    public class SignUpViewModel : BaseViewModel
     {
         private SignUpModel _signUpModel;
 
         private bool _isBusy;
         private bool _canSignUp;
         private bool _isInvalidData;
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public string UserName
         {
@@ -188,12 +186,6 @@ namespace Lab_9.ViewModels.Account
             {
                 IsBusy = false;
             }
-        }
-
-
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

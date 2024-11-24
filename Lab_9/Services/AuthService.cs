@@ -14,7 +14,6 @@ namespace Lab_9.Services
         private const string _CLIENT_SECRET = "U4MH_xSWczLKd8J15rGGLLk1UdTxB60mmeUaDBv6AaVgz8n5QfMQdQnW1ewB9AcM";
         private const string _AUDIENCE = "https://dev-uvnmpcrfbz07kkku.us.auth0.com/api/v2/";
         private const string _CONNECTION = "Username-Password-Authentication";
-        private const string _LAB_6_API_URL = "http://192.168.31.82:3001";
 
         static AuthService()
         {

@@ -1,19 +1,16 @@
 ﻿using Lab_9.Models;
 using Lab_9.Services;
-using System.ComponentModel;
 using System.Windows.Input;
 
 namespace Lab_9.ViewModels.Account
 {
-    internal class LoginViewModel : INotifyPropertyChanged
+    internal class LoginViewModel : BaseViewModel
     {
         private readonly LoginModel _loginModel;
 
         private bool _isBusy;
         private bool _canLogin;
         private bool _isInvalidData;
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public string Email
         {
@@ -123,11 +120,6 @@ namespace Lab_9.ViewModels.Account
             {
                 IsBusy = false;
             }
-        }
-
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
