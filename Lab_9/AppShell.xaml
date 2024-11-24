@@ -21,6 +21,13 @@
         ContentTemplate="{DataTemplate views:ProfileView}"
         Route="profile"/>
     <ShellContent
+        x:Name="SearchShell"
+        Title="Search"
+        FlyoutItemIsVisible="False"
+        ContentTemplate="{DataTemplate views:SearchView}"
+        Route="search"/>
+    
+    <ShellContent
         x:Name="LoginShell"
         Title="Login"
         FlyoutItemIsVisible="True"

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Lab_9.Views.SearchView"
+             xmlns:viewModels="clr-namespace:Lab_9.ViewModels"
+             Title="Search">
+    <ContentPage.BindingContext>
+        <viewModels:SearchViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="15">
+            <Label Text="Search:" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" />
+
+            <Label Text="Booking - From Date:" />
+            <DatePicker Date="{Binding DateFrom}" />
+
+            <Label Text="Booking - To Date:" />
+            <DatePicker Date="{Binding DateTo}" />
+
+            <Label Text="Vehicle - Reg Numbers (Пошук за регістраційними номерами авто. Розділяти комами):" />
+            <Entry Text="{Binding Items}" Placeholder="Enter items..." />
+
+            <Label Text="Customer - Name (Starts With):" />
+            <Entry Text="{Binding StartsWith}" />
+
+            <Label Text="Customer - Name (Ends With):" />
+            <Entry Text="{Binding EndsWith}" />
+
+            <Button Text="Search" Command="{Binding SearchCommand}" />
+            
+            <!-- Result: -->
+
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Margin="0,10" />
+
+            <CollectionView ItemsSource="{Binding Bookings}" IsVisible="{Binding ShowResult}" Margin="0, 20, 0, 0">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BorderColor="Gray" Padding="10" Margin="5">
+                            <StackLayout>
+                                <Label Text="Booking ID:" FontAttributes="Bold"/>
+                                <Label Text="{Binding Id}" />
+
+                                <Label Text="From:" FontAttributes="Bold"/>
+                                <Label Text="{Binding DateFrom, StringFormat='{0:yyyy-MM-dd HH:mm}'}" />
+
+                                <Label Text="To:" FontAttributes="Bold"/>
+                                <Label Text="{Binding DateTo, StringFormat='{0:yyyy-MM-dd HH:mm}'}" />
+
+                                <Label Text="Confirmation Letter Sent:" FontAttributes="Bold"/>
+                                <Label Text="{Binding IsConfirmationLetterSent}" />
+
+                                <Label Text="Payment Received:" FontAttributes="Bold"/>
+                                <Label Text="{Binding IsPaymentReceived}" />
+
+                                <Label Text="Booking Status:" FontAttributes="Bold"/>
+                                <Label Text="{Binding BookingStatusCode}" />
+
+                                <Label Text="Vehicle Registration Number:" FontAttributes="Bold"/>
+                                <Label Text="{Binding VehicleRegNumber}" />
+
+                                <Button Text="More" 
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:SearchViewModel}}, Path=ShowMoreCommand}"
+                                    CommandParameter="{Binding Id}"/>
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
