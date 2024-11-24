@@ -1,4 +1,5 @@
-﻿using Lab_9.Views.DataBase.Booking;
+﻿using Lab_9.Views.DataBase;
+using Lab_9.Views.DataBase.Booking;
 using Lab_9.Views.DataBase.BookingStatus;
 using Lab_9.Views.DataBase.Customer;
 
@@ -13,6 +14,8 @@ namespace Lab_9
             Routing.RegisterRoute("database/bookings", typeof(BookingsView));
             Routing.RegisterRoute("database/booking-statuses", typeof(BookingStatusesView));
             Routing.RegisterRoute("database/customers", typeof(CustomersView));
+
+            Routing.RegisterRoute("database/graphic", typeof(GraphicView));
         }
 
         public void UpdateNavigation(bool isLoggedIn)

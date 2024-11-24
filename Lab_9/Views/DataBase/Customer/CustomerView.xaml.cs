@@ -4,13 +4,13 @@ namespace Lab_9.Views.DataBase.Customer;
 
 public partial class CustomerView : ContentPage
 {
-    public int Id { get; set; }
+    public int CustomerId { get; set; }
     public CustomerViewModel ViewModel { get; set; }
     public CustomerView(int id)
 	{
 		InitializeComponent();
 
-        Id = id;
+        CustomerId = id;
 
         ViewModel = new CustomerViewModel();
         BindingContext = ViewModel;
@@ -22,7 +22,7 @@ public partial class CustomerView : ContentPage
 
         if (ViewModel != null)
         {
-            _ = Task.Run(() => ViewModel.LoadDataAsync(Id));
+            _ = Task.Run(() => ViewModel.LoadDataAsync(CustomerId));
         }
     }
 }

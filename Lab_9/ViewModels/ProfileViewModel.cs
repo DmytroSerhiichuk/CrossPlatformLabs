@@ -48,12 +48,14 @@ namespace Lab_9.ViewModels
         public ICommand NavigateToBookingsCommand { get; }
         public ICommand NavigateToBookingStatusesCommand { get; }
         public ICommand NavigateToCustomersCommand { get; }
+        public ICommand NavigateToGraphicCommand { get; }
         public ProfileViewModel()
         {
             LogoutCommand = new Command(LogoutAsync);
             NavigateToBookingsCommand = new Command(NavigateToBookings);
             NavigateToBookingStatusesCommand = new Command(NavigateToBookingStatuses);
             NavigateToCustomersCommand = new Command(NavigateToCustomers);
+            NavigateToGraphicCommand = new Command(NavigateToGraphic);
         }
 
         public async Task LoadUserAsync()
@@ -95,6 +97,10 @@ namespace Lab_9.ViewModels
         public async void NavigateToCustomers()
         {
             await Shell.Current.GoToAsync("database/customers");
+        }
+        public async void NavigateToGraphic()
+        {
+            await Shell.Current.GoToAsync("database/graphic");
         }
     }
 }

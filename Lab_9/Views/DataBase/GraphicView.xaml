@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:chart="clr-namespace:Microcharts.Maui;assembly=Microcharts.Maui"
+             x:Class="Lab_9.Views.DataBase.GraphicView"
+             xmlns:viewModels="clr-namespace:Lab_9.ViewModels.DataBase"
+             Title="Graphic">
+
+    <ContentPage.BindingContext>
+        <viewModels:GraphicViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <StackLayout>
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Margin="0,10" />
+            
+            <chart:ChartView Chart="{Binding ChartData}" HeightRequest="300" />
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

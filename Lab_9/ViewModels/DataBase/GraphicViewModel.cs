@@ -1,16 +1,15 @@
 ﻿using Lab_9.DTO;
 using Lab_9.Services;
-using Lab_9.Views.DataBase.Customer;
-using System.Collections.ObjectModel;
-using System.Windows.Input;
+using Microcharts;
+using SkiaSharp;
 
-namespace Lab_9.ViewModels.DataBase.Customer
+namespace Lab_9.ViewModels.DataBase
 {
-    public class CustomersViewModel : BaseViewModel
+    public class GraphicViewModel : BaseViewModel
     {
         private bool _isBusy;
         private bool _isLoaded;
-        private ObservableCollection<CustomerDTO> _customers;
+        private Chart _chartData;
 
         public bool IsBusy
         {
@@ -36,24 +35,18 @@ namespace Lab_9.ViewModels.DataBase.Customer
                 }
             }
         }
-        public ObservableCollection<CustomerDTO> Customers
+
+        public Chart ChartData
         {
-            get => _customers;
+            get => _chartData;
             set
             {
-                if (_customers != value)
+                if (_chartData != value)
                 {
-                    _customers = value;
-                    OnPropertyChanged(nameof(Customers));
+                    _chartData = value;
+                    OnPropertyChanged(nameof(ChartData));
                 }
             }
-        }
-
-        public ICommand ShowMoreCommand { get; }
-
-        public CustomersViewModel()
-        {
-            ShowMoreCommand = new Command<int>(OnShowMore);
         }
 
         public async Task LoadDataAsync()
@@ -65,9 +58,21 @@ namespace Lab_9.ViewModels.DataBase.Customer
             {
                 var token = await AuthService.GetTokenAsync();
 
-                var data = await Lab6Service.GetData<ObservableCollection<CustomerDTO>>(token, "customer");
+                var data = await Lab6Service.GetData<List<BookingStatusDTO>>(token, "booking-status");
 
-                Customers = data;
+                var entries = data.Select(status =>
+                    new ChartEntry(status.BookingCount)
+                    {
+                        Label = status.Code,
+                        ValueLabel = status.BookingCount.ToString(),
+                        Color = SKColor.Parse("#2c3e50")
+                    }).ToList();
+
+                ChartData = new BarChart
+                {
+                    Entries = entries,
+                    LabelTextSize = 30
+                };
             }
             catch (UnauthorizedAccessException)
             {
@@ -84,10 +89,6 @@ namespace Lab_9.ViewModels.DataBase.Customer
                 IsBusy = false;
                 IsLoaded = true;
             }
-        }
-        public async void OnShowMore(int id)
-        {
-            await Shell.Current.Navigation.PushAsync(new CustomerView(id));
         }
     }
 }

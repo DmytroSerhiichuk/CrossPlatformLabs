@@ -4,14 +4,14 @@ namespace Lab_9.Views.DataBase.Booking;
 
 public partial class BookingV2 : ContentPage
 {
-    public int Id { get; set; }
+    public int BookingId { get; set; }
     public BookingV2ViewModel ViewModel { get; set; }
 
     public BookingV2(int id)
 	{
 		InitializeComponent();
 
-        Id = id;
+        BookingId = id;
 
         ViewModel = new BookingV2ViewModel();
         BindingContext = ViewModel;
@@ -23,7 +23,7 @@ public partial class BookingV2 : ContentPage
 
         if (ViewModel != null)
         {
-            _ = Task.Run(() => ViewModel.LoadDataAsync(Id));
+            _ = Task.Run(() => ViewModel.LoadDataAsync(BookingId));
         }
     }
 }

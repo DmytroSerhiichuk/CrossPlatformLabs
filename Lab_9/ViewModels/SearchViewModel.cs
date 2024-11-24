@@ -144,7 +144,7 @@ namespace Lab_9.ViewModels
                 (App.Current.MainPage as AppShell)?.UpdateNavigation(false);
                 await Shell.Current.GoToAsync("//login");
             }
-            catch (HttpRequestException ex)
+            catch (HttpRequestException)
             {
                 await App.Current.MainPage.DisplayAlert("Error", "Something went wrong", "OK");
             }
